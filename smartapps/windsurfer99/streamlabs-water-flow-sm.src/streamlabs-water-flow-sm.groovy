@@ -21,17 +21,25 @@ definition(
     category: "My Apps",
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
     iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png",
-    iconX3Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png") {
+    iconX3Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png",
+ singleInstance: true) {
     appSetting "api_key"
 }
 
 
 preferences {
-	section("Title") {
-		// TODO: put inputs here
-	}
+	page(name: "pageOne", title: "Options", uninstall: true) (
+		section("Title") {
+        		paragraph ("Set the API Key via App Settings")
+            		label (title: "Assign a name", required: false, multiple: false)
+            		input ("modes", "mode", title: "Enter modes when meter is Away", multiple: true, required: false)
+			}
+		}
 }
 
+// get the value of api key
+def mySecret = appSettings.api_key
+		
 def installed() {
 	log.debug "Installed with settings: ${settings}"
 
