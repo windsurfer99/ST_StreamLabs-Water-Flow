@@ -28,22 +28,25 @@ definition(
 
 
 preferences {
-	page(name: "pageOne", title: "Options", uninstall: true) (
-		section("Title") {
-        		paragraph ("Set the API Key via App Settings")
-            		label (title: "Assign a name", required: false, multiple: false)
-            		input ("modes", "mode", title: "Enter modes when meter is Away", multiple: true, required: false)
-			}
+	page(name: "pageOne", title: "Options", uninstall: true, install: true) {
+		section("Inputs") {
+        		paragraph ("Set the API Key via App Settings in IDE")
+            		label (title: "Assign a name for Service Manager", required: false, multiple: true)
+            		input (name: "modes", type: "mode", title: "Enter SmartThings modes when water meter should be Away", multiple: true, required: false)
+            		input (name: "locName", type: "text", title: "Enter location name assigned to Streamlabs meter", multiple: false, required: true)
 		}
+	}
 }
-
-// get the value of api key
-def mySecret = appSettings.api_key
-		
+	
 def installed() {
 	log.debug "Installed with settings: ${settings}"
+	// get the value of api key
+	def mySecret = appSettings.api_key
+    //log.debug "APi Key: $mySecret"
+    //log.debug "Modes: $modes"
 
 	initialize()
+    GetLocations()
 }
 
 def updated() {
@@ -54,7 +57,51 @@ def updated() {
 }
 
 def initialize() {
-	// TODO: subscribe to attributes, devices, locations, etc.
+	log.debug "Initialize with settings: ${settings}"
+
+}
+
+def GetLocations() {
+    def params = [
+        uri:  'https://api.streamlabswater.com/v1/locations',
+        headers: ['Authorization': 'Bearer ' + appSettings.api_key],
+        contentType: 'application/json',
+    ]
+    log.debug "params for locations: ${params}"
+//    def TotalLocations
+try {
+		def location
+        httpGet(params) {resp ->
+            //log.debug "resp: ${resp}"
+            def resp_data = resp.data
+            //log.debug "resp data: ${resp.data}"
+            log.debug "resp_data: ${resp_data}"
+            def locations0 = resp_data.locations[0]
+            log.debug "locations0: ${locations0}"
+            def ttl = resp_data.total
+            log.debug "Total locations: ${ttl}"
+            resp.data.locations.each{ loc->
+            	log.debug "name of location: ${loc.name}"
+                if (loc.name == locName) {
+                	state.location = loc
+                }
+            }
+            location = state.location
+            log.debug "location to use: ${location}"
+            //log.debug "# of locations: ${resp.data.total}"
+            //log.debug "resp contentType: ${resp.contentType}"
+            //def totl = resp.data.locations[0].name
+            //log.debug "name of locations[0]: ${totl}"
+ 
+            log.debug "resp status: ${resp.status}"
+            if (resp.status == 200){
+                log.debug "resp status good"
+            }
+
+        }
+    } catch (e) {
+        log.error "error in locations: $e"
+    }
 }
 
 // TODO: implement event handlers
