@@ -31,7 +31,7 @@ preferences {
 		section("Inputs") {
         		paragraph ("Set the API Key via App Settings in IDE")
             		label (title: "Assign a name for Service Manager", required: false, multiple: true)
-            		input (name: "modes", type: "mode", title: "Enter SmartThings modes when water meter should be Away", multiple: true, required: false)
+            		input (name: "SL_awayModes", type: "mode", title: "Enter SmartThings modes when water meter should be Away", multiple: true, required: false)
             		input (name: "SL_locName", type: "text", title: "Enter Streamlabs location name assigned to Streamlabs flow meter", multiple: false, required: true)
 		}
 	}
@@ -42,8 +42,8 @@ def installed() {
 	// get the value of api key
 	def mySecret = appSettings.api_key
     //log.debug "APi Key: $mySecret"
-    //log.debug "Modes: $modes"
-
+    //log.debug "Modes: $SL_awayModes"
+    subscribe(location, "mode", modeChangeHandler)
 	initialize()
     initSL_Locations()
 }
@@ -93,7 +93,8 @@ def initSL_Locations() {
             //def totl = resp.data.locations[0].name
             //log.debug "name of locations[0]: ${totl}"
  
-updateAway()
+//updateAway()
+			log.debug "location.currentMode: ${location.currentMode}"
             //log.debug "initSL_Locations resp status: ${resp.status}"
             //if (resp.status == 200){
             //    log.debug "initSL_Locations resp status good"
@@ -105,15 +106,15 @@ updateAway()
     }
 }
 
-//Set Away status
-def updateAway() {
-	def newHomeAway
+//Method to set Streamlabs homeAway status; called with 'home' or 'away'
+def updateAway(newHomeAway) {
+	//def newHomeAway
     //log.debug "state.SL_location.homeAway: ${state.SL_location.homeAway}"
-    if (state.SL_location.homeAway == "home") {
-    	newHomeAway = "away"
-    } else {
-    	newHomeAway = "home"
-    }
+    //if (state.SL_location.homeAway == "home") {
+    //	newHomeAway = "away"
+    //} else {
+    //	newHomeAway = "home"
+    //}
     //log.debug "newHomeAway: ${newHomeAway}"
     def cmdBody = [
 			"homeAway": newHomeAway
@@ -138,5 +139,32 @@ def updateAway() {
     }
 }
 
-
+//handler for when SmartThings mode changes
+//if new mode is one of the ones specified for a StreamLabs away mode, change Streamlabs to away
+def modeChangeHandler(evt) {
+    log.debug "mode changed to ${evt.value}"
+    //log.debug "SL_awayModes: ${SL_awayModes}"
+    //log.debug "location.currentMode: ${location.currentMode}"
+/*    if (SL_awayModes?.find{it == location.currentMode} != null) {
+        //change to away
+        updateAway("away")
+    }  else {
+        //change to home
+        updateAway("home")
+    }
+*/
+	def foundmode = false
+	SL_awayModes?.each{ awayModes->
+        if (location.currentMode == awayModes) {
+        	foundmode = true //new mode is one to set Streamlabs to away
+        }
+    }
+    if (foundmode) {
+        //change to away
+        updateAway("away")
+    } else {
+        //change to home; new mode isn't one specified for Streamlabs away
+        updateAway("home")
+    }
+}
 // TODO: implement event handlers
