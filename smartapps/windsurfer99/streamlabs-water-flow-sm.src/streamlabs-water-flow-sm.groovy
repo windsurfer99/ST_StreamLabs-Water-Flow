@@ -22,7 +22,7 @@ definition(
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
     iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png",
     iconX3Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png",
- singleInstance: true) {
+ 	singleInstance: true) {
     appSetting "api_key"
 }
 
@@ -45,8 +45,8 @@ def installed() {
     //log.debug "Modes: $SL_awayModes"
     subscribe(location, "mode", modeChangeHandler)
 	initialize()
-    initSL_Locations()
 }
+
 
 def updated() {
 	log.debug "Updated with settings: ${settings}"
@@ -57,7 +57,30 @@ def updated() {
 
 def initialize() {
 	log.debug "Initialize with settings: ${settings}"
+    initSL_Locations() //determine Streamlabs location to use
+    runEvery1Minute(pollSLAlert) //Poll Streamlabs cloud for leak alert
+}
 
+//Handler for runEvery; determine if there are any alerts
+def pollSLAlert() {
+    def params = [
+            uri:  'https://api.streamlabswater.com/v1/locations/' + state.SL_location.locationId,
+            headers: ['Authorization': 'Bearer ' + appSettings.api_key],
+            contentType: 'application/json',
+            ]
+	try {
+        httpGet(params) {resp ->
+            log.debug "pollSLAlert resp.data: ${resp.data}"
+            def resp_data = resp.data
+            def SL_locationsAlert = resp_data.alerts[0]
+            if (SL_locationsAlert) {
+            	log.debug "pollSLAlert Alert0 received: ${SL_locationsAlert}"
+                //send event to child device handler
+            }
+        }
+    } catch (e) {
+        log.error "error in pollSLAlert: $e"
+    }
 }
 
 //Get desired location from Streamlabs cloud based on user's entered location's name
@@ -68,9 +91,10 @@ def initSL_Locations() {
             contentType: 'application/json',
     ]
     //log.debug "params for locations: ${params}"
+    state.SL_location = null
 
 	try {
-		def SL_location
+		//def SL_location
         httpGet(params) {resp ->
             //log.debug "resp: ${resp}"
             def resp_data = resp.data
@@ -86,15 +110,18 @@ def initSL_Locations() {
                 	state.SL_location = SL_loc
                 }
             }
-            SL_location = state.SL_location
-            log.debug "SL_location to use: ${SL_location}"
+            if (!state.SL_location) {
+            	log.error "SmartLabs location name: ${SL_locName} not found!"
+            }
+            //SL_location = state.SL_location
+            log.debug "SL_location to use: ${state.SL_location}"
             //log.debug "# of SL_locations: ${resp.data.total}"
             //log.debug "resp contentType: ${resp.contentType}"
             //def totl = resp.data.locations[0].name
             //log.debug "name of locations[0]: ${totl}"
  
 //updateAway()
-			log.debug "location.currentMode: ${location.currentMode}"
+			//log.debug "location.currentMode: ${location.currentMode}"
             //log.debug "initSL_Locations resp status: ${resp.status}"
             //if (resp.status == 200){
             //    log.debug "initSL_Locations resp status good"
