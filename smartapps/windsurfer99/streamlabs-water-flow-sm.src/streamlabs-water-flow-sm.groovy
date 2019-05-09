@@ -1,5 +1,6 @@
 /**
  *  StreamLabs Water Flow SM
+ *  Smart App/ Service Manager for StreamLabs Water Flow Meter
  *
  *  Copyright 2019 Bruce Andrews
  *
@@ -43,7 +44,6 @@ def installed() {
 	def mySecret = appSettings.api_key
     //log.debug "APi Key: $mySecret"
     //log.debug "Modes: $SL_awayModes"
-    subscribe(location, "mode", modeChangeHandler)
 	initialize()
 }
 
@@ -57,6 +57,7 @@ def updated() {
 
 def initialize() {
 	log.debug "Initialize with settings: ${settings}"
+    subscribe(location, "mode", modeChangeHandler)
     initSL_Locations() //determine Streamlabs location to use
     runEvery1Minute(pollSLAlert) //Poll Streamlabs cloud for leak alert
 }
@@ -112,6 +113,15 @@ def initSL_Locations() {
             }
             if (!state.SL_location) {
             	log.error "SmartLabs location name: ${SL_locName} not found!"
+            } else {
+            //load device handler for this location (device)
+                def existingDevice = getChildDevice(state.SL_location.locationId)
+                if(!existingDevice) {
+                    //def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow", state.SL_location.locationId, null, [name: "Device.${deviceId}", label: device.name, completedSetup: true])
+                    def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow DH", state.SL_location.locationId, null, [name: "Streamlabs", label: "Streamlabs", completedSetup: true])
+            		log.debug "StreamLab device created: ${childDevice}"
+                }
+            
             }
             //SL_location = state.SL_location
             log.debug "SL_location to use: ${state.SL_location}"
@@ -129,7 +139,7 @@ def initSL_Locations() {
 
         }
     } catch (e) {
-        log.error "error in SL_locations: $e"
+        log.error "error in initSL_locations: $e"
     }
 }
 
@@ -168,30 +178,26 @@ def updateAway(newHomeAway) {
 
 //handler for when SmartThings mode changes
 //if new mode is one of the ones specified for a StreamLabs away mode, change Streamlabs to away
+//Do nothing if the user hasn't selected any modes defined as being Streamlabs away.
 def modeChangeHandler(evt) {
     log.debug "mode changed to ${evt.value}"
     //log.debug "SL_awayModes: ${SL_awayModes}"
     //log.debug "location.currentMode: ${location.currentMode}"
-/*    if (SL_awayModes?.find{it == location.currentMode} != null) {
-        //change to away
-        updateAway("away")
-    }  else {
-        //change to home
-        updateAway("home")
-    }
-*/
 	def foundmode = false
-	SL_awayModes?.each{ awayModes->
-        if (location.currentMode == awayModes) {
-        	foundmode = true //new mode is one to set Streamlabs to away
+    log.debug "SL_awayModes: ${SL_awayModes}; size: ${SL_awayModes?.size}"
+    if (SL_awayModes?.size() > 0) {//only do something if user specified some modes
+        SL_awayModes?.each{ awayModes->
+            if (location.currentMode == awayModes) {
+                foundmode = true //new mode is one to set Streamlabs to away
+            }
         }
-    }
-    if (foundmode) {
-        //change to away
-        updateAway("away")
-    } else {
-        //change to home; new mode isn't one specified for Streamlabs away
-        updateAway("home")
+        if (foundmode) {
+            //change to away
+            updateAway("away")
+        } else {
+            //change to home; new mode isn't one specified for Streamlabs away
+            updateAway("home")
+        }
     }
 }
 // TODO: implement event handlers
