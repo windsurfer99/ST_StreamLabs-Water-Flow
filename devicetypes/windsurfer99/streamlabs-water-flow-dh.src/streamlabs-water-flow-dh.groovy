@@ -35,9 +35,16 @@ metadata {
 	}
 }
 
-// parse events into attributes
+// parse events into attributes; not really used with this type of Device Handler
 def parse(String description) {
 	log.debug "Parsing '${description}'"
 	// TODO: handle 'water' attribute
 
+}
+
+//handle Events from Service Manager; typically wet & dry
+def generateEvent(Map results) {
+	log.debug "generateEvent parameters: '${results}'"
+	sendEvent(results)
+	return null
 }
