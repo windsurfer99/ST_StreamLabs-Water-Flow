@@ -39,17 +39,16 @@ preferences {
 }
 
 def installed() {
-	log.debug "Installed with settings: ${settings}"
+	log.debug "StreamLabs SM installed with settings: ${settings}"
 	// get the value of api key
 	def mySecret = appSettings.api_key
-    //log.debug "APi Key: $mySecret"
     //log.debug "Modes: $SL_awayModes"
 	initialize()
 }
 
 
 def updated() {
-	log.debug "Updated with settings: ${settings}"
+	log.debug "StreamLabs SM updated with settings: ${settings}"
 
 	unsubscribe()
     cleanup()
@@ -57,7 +56,7 @@ def updated() {
 }
 
 def initialize() {
-	log.debug "Initialize with settings: ${settings}"
+	log.debug "StreamLabs SM initialize with settings: ${settings}"
     state.SL_location = null
     state.childDevice = null
     state.inAlert = false
@@ -70,15 +69,16 @@ def initialize() {
         existingDevice?.generateEvent(eventData)
         state.inAlert =  false
 	    runEvery1Minute(pollSLAlert) //Poll Streamlabs cloud for leak alert
+        determineFlows() //get current flow totals from cloud
     }
 }
 
 //remove things
 def cleanup() {
-	log.debug "cleanup called"
+	log.debug "StreamLabs SM cleanup called"
     def SL_Devices = getChildDevices()
     SL_Devices.each {
-		log.debug "deleting SL deviceNetworkID: ${it.deviceNetworkId}"
+		log.debug "StreamLabs SM deleting SL deviceNetworkID: ${it.deviceNetworkId}"
         deleteChildDevice(it.deviceNetworkId)
     }
     state.SL_location = null
@@ -98,13 +98,13 @@ def pollSLAlert() {
                 ]
         try {
             httpGet(params) {resp ->
-                log.debug "pollSLAlert resp.data: ${resp.data}"
+                log.debug "StreamLabs SM pollSLAlert resp.data: ${resp.data}"
                 def resp_data = resp.data
                 def SL_locationsAlert = resp_data.alerts[0]
                 if (SL_locationsAlert) {
                     if (!state.inAlert){
                         //new alert, send wet event to child device handler
-                        log.debug "new pollSLAlert Alert0 received: ${SL_locationsAlert}; send wet event"
+                        log.debug "StreamLabs SM new pollSLAlert Alert0 received: ${SL_locationsAlert}; send wet event"
                         def eventData = [name: "water", value: "wet"]
                         existingDevice?.generateEvent(eventData)
                         state.inAlert =  true
@@ -112,7 +112,7 @@ def pollSLAlert() {
                 } else {
                     if (state.inAlert){
                         //alert removed, send dry event to child device handler
-                        log.debug "pollSLAlert Alert0 removed; send dry event"
+                        log.debug "StreamLabs SM pollSLAlert Alert0 deactivated ; send dry event"
                         def eventData = [name: "water", value: "dry"]
                         existingDevice?.generateEvent(eventData)
                         state.inAlert =  false
@@ -120,9 +120,39 @@ def pollSLAlert() {
                 }
             }
         } catch (e) {
-            log.error "error in pollSLAlert: $e"
+            log.error "StreamLabs SM error in pollSLAlert: $e"
         }
     }
+}
+
+//determine flow totals from cloud
+def determineFlows() {
+    def existingDevice = getChildDevice(state.SL_location?.locationId)
+	if (state.SL_location){
+        def params = [
+                uri:  'https://api.streamlabswater.com/v1/locations/' + state.SL_location.locationId + '/readings/water-usage/summary',
+                headers: ['Authorization': 'Bearer ' + appSettings.api_key],
+                contentType: 'application/json',
+                ]
+        try {
+            httpGet(params) {resp ->
+                log.debug "StreamLabs SM retrieveFlows resp.data: ${resp.data}"
+                def resp_data = resp.data
+                state.todayFlow = resp_data?.today
+                state.thisMonthFlow = resp_data?.thisMonth
+                state.thisYearFlow = resp_data?.thisYear
+                state.unitsFlow = resp_data?.units
+            }
+        } catch (e) {
+            log.error "StreamLabs SM error in retrieveFlows: $e"
+        }
+    }
+}
+
+// return current low totals
+Map retrieveFlows() {
+	log.debug "StreamLabs SM retrieveFlows called"
+	return ["todayFlow":state.todayFlow, "thisMonthFlow":state.thisMonthFlow, "thisYearFlow":state.thisYearFlow]
 }
 
 //Get desired location from Streamlabs cloud based on user's entered location's name
@@ -139,28 +169,28 @@ def initSL_Locations() {
             def resp_data = resp.data
             def SL_locations0 = resp_data.locations[0]
             def ttl = resp_data.total
-            log.debug "Total SL_locations: ${ttl}"
+            log.debug "StreamLabs SM total SL_locations: ${ttl}"
             resp.data.locations.each{ SL_loc->
                 if (SL_loc.name == SL_locName) {
                 	state.SL_location = SL_loc
                 }
             }
             if (!state.SL_location) {
-            	log.error "SmartLabs location name: ${SL_locName} not found!"
+            	log.error "StreamLabs SM location name: ${SL_locName} not found!"
             } else {
             //load device handler for this location (device)
                 def existingDevice = getChildDevice(state.SL_location.locationId)
                 if(!existingDevice) {
                     //def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow", state.SL_location.locationId, null, [name: "Device.${deviceId}", label: device.name, completedSetup: true])
                     def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow DH", state.SL_location.locationId, null, [name: "Streamlabs Water Flow", label: "Streamlabs Water Flow", completedSetup: true])
-            		log.debug "StreamLab device created: ${childDevice}"
+            		log.debug "StreamLabs SM device created: ${childDevice}"
                 }
             
             }
-            log.debug "SL_location to use: ${state.SL_location}"
+            log.debug "StreamLabs SM SL_location to use: ${state.SL_location}"
         }
     } catch (e) {
-        log.error "error in initSL_locations: $e"
+        log.error "StreamLabs SM error in initSL_locations: $e"
     }
 }
 
@@ -185,15 +215,15 @@ def updateAway(newHomeAway) {
 			body : new groovy.json.JsonBuilder(cmdBody).toString()    
             ]
 
-    log.debug "params for updateAway: ${params}"
+    log.debug "StreamLabs SM params for updateAway: ${params}"
 
 	try {
         httpPutJson(params){resp ->
-            log.debug "updateAway resp data: ${resp.data}"
-            log.debug "updateAway resp status: ${resp.status}"
+            log.debug "StreamLabs SM updateAway resp data: ${resp.data}"
+            log.debug "StreamLabs SM updateAway resp status: ${resp.status}"
         }
     } catch (e) {
-        log.error "error in updateAway: $e"
+        log.error "StreamLabs SM error in updateAway: $e"
     }
 }
 
@@ -201,11 +231,11 @@ def updateAway(newHomeAway) {
 //if new mode is one of the ones specified for a StreamLabs away mode, change Streamlabs to away
 //Do nothing if the user hasn't selected any modes defined as being Streamlabs away.
 def modeChangeHandler(evt) {
-    log.debug "mode changed to ${evt.value}"
+    log.debug "StreamLabs SM SmartThings mode changed to ${evt.value}"
     //log.debug "SL_awayModes: ${SL_awayModes}"
     //log.debug "location.currentMode: ${location.currentMode}"
 	def foundmode = false
-    log.debug "SL_awayModes: ${SL_awayModes}; size: ${SL_awayModes?.size}"
+    log.debug "StreamLabs SM SL_awayModes: ${SL_awayModes}; size: ${SL_awayModes?.size}"
     if (SL_awayModes?.size() > 0) {//only do something if user specified some modes
         SL_awayModes?.each{ awayModes->
             if (location.currentMode == awayModes) {
