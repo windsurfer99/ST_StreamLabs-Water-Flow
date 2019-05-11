@@ -18,6 +18,10 @@ metadata {
 		capability "Water Sensor"
         capability "Sensor"
         capability "Health Check"
+        capability "refresh"
+        attribute "todayFlow", "string"
+        attribute "monthFlow", "string"
+        attribute "yearFlow", "string"
 	}
 
 
@@ -30,10 +34,31 @@ metadata {
 			state "dry", icon:"st.alarm.water.dry", backgroundColor:"#ffffff"
 			state "wet", icon:"st.alarm.water.wet", backgroundColor:"#00A0DC"
 		}
+		standardTile("refresh", "capability.refresh", width: 2, height: 2, decoration: "flat") {
+			state "default", label:"Refresh", action:"refresh.refresh"
+		}
+		
+		valueTile("todayFlow", "device.todayFlow", decoration: "flat", height: 2, width: 2) {
+			state "todayFlow", label: 'Usage Today ${currentValue} Gal.'
+		}
+
+//		valueTile("todayFlow", "device.todayFlow", decoration: "flat", height: 2, width: 2) {
+//			state "todayFlow", label: 'Usage Today\n\r ${currentValue} Gal.'
+//		}
+
+		valueTile("monthFlow", "device.monthFlow", decoration: "flat", height: 2, width: 2) {
+			state "monthFlow", label: 'Usage this month ${currentValue} Gal.'
+		}
+ 
+		valueTile("yearFlow", "device.yearFlow", decoration: "flat", height: 2, width: 2) {
+			state "yearFlow", label: 'Usage this year ${currentValue} Gal.'
+		}
+
 		main "water"
-		details(["water"])
+		details(["water", "refresh", "todayFlow", "monthFlow", "yearFlow"])
 	}
 }
+//required implementations
 
 // parse events into attributes; not really used with this type of Device Handler
 def parse(String description) {
@@ -41,8 +66,27 @@ def parse(String description) {
 	// TODO: handle 'water' attribute
 
 }
+//poll for changes; framework calls every 10 minutes
+def poll() {
+	log.debug "StreamLabs DH poll called"
+	//sendCmdtoServer('{"system":{"get_sysinfo":{}}}', "deviceCommand", "commandResponse")
+}
 
-//handle Events from Service Manager; typically wet & dry
+def refresh(){
+	def flows = parent.retrieveFlows() 
+	log.debug "StreamLabs DH refresh flows: ${flows}"
+    state.todayFlow = flows.todayFlow
+    state.thisMonthFlow = flows.thisMonthFlow
+    state.thisYearFlow = flows.thisYearFlow
+
+	sendEvent(name: "todayFlow", value: Math.round(flows.todayFlow))
+	sendEvent(name: "monthFlow", value: Math.round(flows.thisMonthFlow))
+	sendEvent(name: "yearFlow", value: Math.round(flows.thisYearFlow))
+
+	//sendCmdtoServer('{"system":{"get_sysinfo":{}}}', "deviceCommand", "commandResponse")
+	//runIn(2, getPower)
+}
+//handle Events sent from Service Manager; typically wet & dry
 def generateEvent(Map results) {
 	log.debug "generateEvent parameters: '${results}'"
 	sendEvent(results)
