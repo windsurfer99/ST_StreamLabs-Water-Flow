@@ -19,9 +19,12 @@ metadata {
         capability "Sensor"
         capability "Health Check"
         capability "refresh"
+        command "changeToAway"
+        command "changeToHome"
         attribute "todayFlow", "string"
         attribute "monthFlow", "string"
         attribute "yearFlow", "string"
+        attribute "homeAway", "enum", ["home", "away"]
 	}
 
 
@@ -34,8 +37,13 @@ metadata {
 			state "dry", icon:"st.alarm.water.dry", backgroundColor:"#ffffff"
 			state "wet", icon:"st.alarm.water.wet", backgroundColor:"#00A0DC"
 		}
-		standardTile("refresh", "capability.refresh", width: 2, height: 2, decoration: "flat") {
-			state "default", label:"Refresh", action:"refresh.refresh"
+		standardTile("refresh", "capability.refresh", decoration: "flat", width: 2, height: 2, canChangeIcon: true) {
+			state "default", label:"Refresh", icon:"st.secondary.refresh", action:"refresh.refresh"
+		}
+		
+		standardTile("homeAway", "device.homeAway", decoration: "flat", width: 2, height: 2, canChangeIcon: true) {
+			state "home", icon:"st.nest.nest-home", defaultState:true, action:"changeToAway", backgroundColor:"#00A0DC"
+			state "away", icon:"st.nest.nest-away", action:"changeToHome", backgroundColor:"#CCCCCC"
 		}
 		
 		valueTile("todayFlow", "device.todayFlow", decoration: "flat", height: 2, width: 2) {
@@ -55,10 +63,13 @@ metadata {
 		}
 
 		main "water"
-		details(["water", "refresh", "todayFlow", "monthFlow", "yearFlow"])
+		details(["water", "homeAway", "refresh", "todayFlow", "monthFlow", "yearFlow"])
 	}
 }
 //required implementations
+def initialize(){
+	state.init = true
+}
 
 // parse events into attributes; not really used with this type of Device Handler
 def parse(String description) {
@@ -73,22 +84,49 @@ def poll() {
 }
 
 def refresh(){
-	def flows = parent.retrieveFlows() 
-	log.debug "StreamLabs DH refresh flows: ${flows}"
-    state.todayFlow = flows.todayFlow
-    state.thisMonthFlow = flows.thisMonthFlow
-    state.thisYearFlow = flows.thisYearFlow
+	def cloudData = parent.retrievecloudData() 
+	log.debug "StreamLabs DH refresh- cloudData: ${cloudData}"
+    state.todayFlow = cloudData.todayFlow
+    state.thisMonthFlow = cloudData.thisMonthFlow
+    state.thisYearFlow = cloudData.thisYearFlow
+    state.homeAway = cloudData.homeAway
+    state.wetDry = cloudData.inAlert ? "wet" : "dry"
 
-	sendEvent(name: "todayFlow", value: Math.round(flows.todayFlow))
-	sendEvent(name: "monthFlow", value: Math.round(flows.thisMonthFlow))
-	sendEvent(name: "yearFlow", value: Math.round(flows.thisYearFlow))
+	sendEvent(name: "todayFlow", value: Math.round(cloudData.todayFlow))
+	sendEvent(name: "monthFlow", value: Math.round(cloudData.thisMonthFlow))
+	sendEvent(name: "yearFlow", value: Math.round(cloudData.thisYearFlow))
+	sendEvent(name: "water", value: state.wetDry)
+	sendEvent(name: "homeAway", value: cloudData.homeAway)
 
 	//sendCmdtoServer('{"system":{"get_sysinfo":{}}}', "deviceCommand", "commandResponse")
 	//runIn(2, getPower)
 }
+
+def uninstalled() {
+	log.debug "StreamLabs DH uninstalled called for ${device.deviceNetworkId}"
+    //delete me from parent Service Manager; this will leave in a strange state until parent recreates me
+    if (state.init == true){
+		parent.deleteSmartLabsDevice(device.deviceNetworkId)
+    }
+    state.init = false
+}
+
+//actions
+//Tile action to change StreamLabs to home
+def changeToHome() {
+	log.debug "StreamLabs DH changeToHome called"
+	parent.updateAway("home")
+}
+
+//Tile action to change StreamLabs to away
+def changeToAway() {
+	log.debug "StreamLabs DH changeToAway called"
+	parent.updateAway("away")
+}
+
 //handle Events sent from Service Manager; typically wet & dry
 def generateEvent(Map results) {
-	log.debug "generateEvent parameters: '${results}'"
+	log.debug "StreamLabs DH generateEvent parameters: '${results}'"
 	sendEvent(results)
 	return null
 }
