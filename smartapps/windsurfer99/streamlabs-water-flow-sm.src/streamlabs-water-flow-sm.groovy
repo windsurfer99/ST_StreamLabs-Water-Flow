@@ -38,6 +38,7 @@ preferences {
 	}
 }
 
+//required methods
 def installed() {
 	log.debug "StreamLabs SM installed with settings: ${settings}"
 	// get the value of api key
@@ -52,7 +53,8 @@ def updated() {
 
 	unsubscribe()
     cleanup()
-	initialize()
+    runIn(2, "initialize") //deleteChildDevice seems to take a while to delete; wait before re-creating
+	//initialize()
 }
 
 def initialize() {
@@ -60,6 +62,8 @@ def initialize() {
     state.SL_location = null
     state.childDevice = null
     state.inAlert = false
+    state.homeAway = "home"
+    state.init = true
     subscribe(location, "mode", modeChangeHandler)
     initSL_Locations() //determine Streamlabs location to use
     if (state.SL_location) { 
@@ -73,13 +77,28 @@ def initialize() {
     }
 }
 
+def uninstalled() {
+	if(state.init) {
+		log.debug "StreamLabs SM uninstalled called after initialized"
+ 		cleanup()
+    } else {
+		log.debug "StreamLabs SM uninstalled called but ignored- after uninstall"
+    }
+    state.init = false
+}
+
 //remove things
 def cleanup() {
 	log.debug "StreamLabs SM cleanup called"
     def SL_Devices = getChildDevices()
     SL_Devices.each {
-		log.debug "StreamLabs SM deleting SL deviceNetworkID: ${it.deviceNetworkId}"
-        deleteChildDevice(it.deviceNetworkId)
+        log.debug "StreamLabs SM deleting SL deviceNetworkID: ${it.deviceNetworkId}"
+    	try {
+            deleteChildDevice(it.deviceNetworkId)
+        }
+    	catch (e) {
+	        log.debug "StreamLabs SM caught and ignored deleting chile device: {it.deviceNetworkId} in cleanup: $e"
+       	}
     }
     state.SL_location = null
     state.childDevice = null
@@ -136,7 +155,7 @@ def determineFlows() {
                 ]
         try {
             httpGet(params) {resp ->
-                log.debug "StreamLabs SM retrieveFlows resp.data: ${resp.data}"
+                log.debug "StreamLabs SM determineFlows resp.data: ${resp.data}"
                 def resp_data = resp.data
                 state.todayFlow = resp_data?.today
                 state.thisMonthFlow = resp_data?.thisMonth
@@ -144,16 +163,35 @@ def determineFlows() {
                 state.unitsFlow = resp_data?.units
             }
         } catch (e) {
-            log.error "StreamLabs SM error in retrieveFlows: $e"
+            log.error "StreamLabs SM error in determineFlows: $e"
         }
     }
 }
 
-// return current low totals
-Map retrieveFlows() {
-	log.debug "StreamLabs SM retrieveFlows called"
-	return ["todayFlow":state.todayFlow, "thisMonthFlow":state.thisMonthFlow, "thisYearFlow":state.thisYearFlow]
+//determine StreamLabs home/away from StreamLabs cloud
+def determinehomeAway() {
+    def existingDevice = getChildDevice(state.SL_location?.locationId)
+	if (state.SL_location){
+        def params = [
+                uri:  'https://api.streamlabswater.com/v1/locations/' + state.SL_location.locationId,
+                headers: ['Authorization': 'Bearer ' + appSettings.api_key],
+                contentType: 'application/json',
+                ]
+		try {
+            httpGet(params) {resp ->
+                log.debug "StreamLabs SM determinehomeAway resp.data: ${resp.data}"
+                log.debug "StreamLabs SM determinehomeAway resp status: ${resp.status}"
+                if (resp.status == 200){//successful retrieve
+                    def resp_data = resp.data
+                    state.homeAway = resp_data?.homeAway
+                }
+            }
+        } catch (e) {
+            log.error "StreamLabs SM error in determinehomeAway: $e"
+        }
+    }
 }
+
 
 //Get desired location from Streamlabs cloud based on user's entered location's name
 def initSL_Locations() {
@@ -169,26 +207,30 @@ def initSL_Locations() {
             def resp_data = resp.data
             def SL_locations0 = resp_data.locations[0]
             def ttl = resp_data.total
-            log.debug "StreamLabs SM total SL_locations: ${ttl}"
+            log.debug "StreamLabs SM initSL_Locations- total SL_locations: ${ttl}"
             resp.data.locations.each{ SL_loc->
                 if (SL_loc.name == SL_locName) {
                 	state.SL_location = SL_loc
                 }
             }
             if (!state.SL_location) {
-            	log.error "StreamLabs SM location name: ${SL_locName} not found!"
+            	log.error "StreamLabs initSL_Locations- StreamLabs location name: ${SL_locName} not found!"
             } else {
-            //load device handler for this location (device)
+            	//save current homeAway status
+                state.homeAway = state.SL_location.homeAway
+                //create device handler for this location (device)
                 def existingDevice = getChildDevice(state.SL_location.locationId)
                 if(!existingDevice) {
                     //def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow", state.SL_location.locationId, null, [name: "Device.${deviceId}", label: device.name, completedSetup: true])
-                    def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow DH", state.SL_location.locationId, null, [name: "Streamlabs Water Flow", label: "Streamlabs Water Flow", completedSetup: true])
-            		log.debug "StreamLabs SM device created: ${childDevice}"
+                    def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow DH", 
+                          state.SL_location.locationId, null, [name: "Streamlabs Water Flow", 
+                          label: "Streamlabs Water Flow", completedSetup: true])
+            		log.debug "StreamLabs SM initSL_Locations- device created with Id: ${state.SL_location.locationId} for SL_location: ${state.SL_location.name}"
+                } else {
+            		log.error "StreamLabs SM initSL_Locations- device not created; already exists: ${existingDevice.getDeviceNetworkId()}"
                 }
-            
             }
-            log.debug "StreamLabs SM SL_location to use: ${state.SL_location}"
-        }
+       }
     } catch (e) {
         log.error "StreamLabs SM error in initSL_locations: $e"
     }
@@ -196,18 +238,9 @@ def initSL_Locations() {
 
 //Method to set Streamlabs homeAway status; called with 'home' or 'away'
 def updateAway(newHomeAway) {
-	//def newHomeAway
-    //log.debug "state.SL_location.homeAway: ${state.SL_location.homeAway}"
-    //if (state.SL_location.homeAway == "home") {
-    //	newHomeAway = "away"
-    //} else {
-    //	newHomeAway = "home"
-    //}
-    //log.debug "newHomeAway: ${newHomeAway}"
     def cmdBody = [
 			"homeAway": newHomeAway
 	]
-    //log.debug "cmdBody: ${cmdBody}"
     def params = [
             uri:  'https://api.streamlabswater.com/v1/locations/' + state.SL_location.locationId,
             headers: ['Authorization': 'Bearer ' + appSettings.api_key],
@@ -221,6 +254,13 @@ def updateAway(newHomeAway) {
         httpPutJson(params){resp ->
             log.debug "StreamLabs SM updateAway resp data: ${resp.data}"
             log.debug "StreamLabs SM updateAway resp status: ${resp.status}"
+            if (resp.status == 200){//successful change
+                def eventData = [name: "homeAway", value: newHomeAway]
+                def existingDevice = getChildDevice(state.SL_location?.locationId)
+                existingDevice?.generateEvent(eventData) //tell child device new home/away status
+                state.homeAway = newHomeAway
+           }
+
         }
     } catch (e) {
         log.error "StreamLabs SM error in updateAway: $e"
@@ -251,4 +291,33 @@ def modeChangeHandler(evt) {
         }
     }
 }
-// TODO: implement event handlers
+
+// Child called methods
+
+// return current flow totals, etc.
+Map retrievecloudData() {
+	log.debug "StreamLabs SM retrievecloudData called"
+    //get latest data from cloud
+    determinehomeAway()
+	return ["todayFlow":state.todayFlow, "thisMonthFlow":state.thisMonthFlow, 
+      "thisYearFlow":state.thisYearFlow, "homeAway":state.homeAway, "inAlert":state.inAlert]
+}
+
+//delete cild device; called by child device to remove itself. Seems unnecessary but documentation says to do this
+def	deleteSmartLabsDevice(deviceid) {
+    def SL_Devices = getChildDevices()
+    SL_Devices.each {
+    	if (it.deviceNetworkId == deviceid) {
+            log.debug "StreamLabs SM deleteSmartLabsDevice- deleting SL deviceNetworkID: ${it.deviceNetworkId}"
+            try {
+                deleteChildDevice(it.deviceNetworkId)
+                sendEvent(name: "DeviceDelete", value: "${it.deviceNetworkId} deleted")
+            }
+            catch (e) {
+                log.debug "StreamLabs SM deleteSmartLabsDevice- caught and ignored deleting chile device: {it.deviceNetworkId} in cleanup: $e"
+            }
+        }
+    }
+}
+
+
