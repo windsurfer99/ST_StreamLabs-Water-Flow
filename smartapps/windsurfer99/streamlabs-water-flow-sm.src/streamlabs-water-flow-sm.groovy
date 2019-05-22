@@ -72,8 +72,11 @@ def initialize() {
     	def existingDevice = getChildDevice(state.SL_location?.locationId)
         existingDevice?.generateEvent(eventData)
         state.inAlert =  false
-	    runEvery1Minute(pollSLAlert) //Poll Streamlabs cloud for leak alert
-        determineFlows() //get current flow totals from cloud
+        schedule("0 0/1 * * * ?", pollSLAlert) //Poll Streamlabs cloud for leak alert
+	    //runEvery1Minute(pollSLAlert) //Poll Streamlabs cloud for leak alert
+        runIn(3,"initDevice") //update once things are initialized
+        //determineFlows() //get current flow totals from cloud
+        //existingDevice?.refresh()
     }
 }
 
@@ -105,7 +108,7 @@ def cleanup() {
     state.inAlert = false
 }
 
-//Handler for runEvery; determine if there are any alerts
+//Handler for schedule; determine if there are any alerts
 def pollSLAlert() {
     //log.debug "pollSLAlert state: ${state}"
     def existingDevice = getChildDevice(state.SL_location?.locationId)
@@ -123,17 +126,15 @@ def pollSLAlert() {
                 if (SL_locationsAlert) {
                     if (!state.inAlert){
                         //new alert, send wet event to child device handler
-                        log.debug "StreamLabs SM new pollSLAlert Alert0 received: ${SL_locationsAlert}; send wet event"
-                        def eventData = [name: "water", value: "wet"]
-                        existingDevice?.generateEvent(eventData)
+                        log.debug "StreamLabs SM new pollSLAlert Alert0 received: ${SL_locationsAlert}; call changeWaterToWet"
+                        existingDevice?.changeWaterToWet()
                         state.inAlert =  true
                     }
                 } else {
                     if (state.inAlert){
                         //alert removed, send dry event to child device handler
-                        log.debug "StreamLabs SM pollSLAlert Alert0 deactivated ; send dry event"
-                        def eventData = [name: "water", value: "dry"]
-                        existingDevice?.generateEvent(eventData)
+                        log.debug "StreamLabs SM pollSLAlert Alert0 deactivated ; call changeWaterToDry"
+                        existingDevice?.changeWaterToDry()
                         state.inAlert =  false
                     }
                 }
@@ -144,10 +145,19 @@ def pollSLAlert() {
     }
 }
 
+//callback in order to initialize device
+def initDevice() {
+    log.debug "StreamLabs SM initDevice called"
+	determineFlows()
+    determinehomeAway()
+    def existingDevice = getChildDevice(state.SL_location?.locationId)
+	existingDevice?.refresh()
+}
+
 //determine flow totals from cloud
 def determineFlows() {
     def existingDevice = getChildDevice(state.SL_location?.locationId)
-	if (state.SL_location){
+	if (existingDevice){
         def params = [
                 uri:  'https://api.streamlabswater.com/v1/locations/' + state.SL_location.locationId + '/readings/water-usage/summary',
                 headers: ['Authorization': 'Bearer ' + appSettings.api_key],
@@ -164,6 +174,10 @@ def determineFlows() {
             }
         } catch (e) {
             log.error "StreamLabs SM error in determineFlows: $e"
+            state.todayFlow = 0
+            state.thisMonthFlow = 0
+            state.thisYearFlow = 0
+            state.unitsFlow = "gallons"
         }
     }
 }
@@ -171,7 +185,7 @@ def determineFlows() {
 //determine StreamLabs home/away from StreamLabs cloud
 def determinehomeAway() {
     def existingDevice = getChildDevice(state.SL_location?.locationId)
-	if (state.SL_location){
+	if (existingDevice){
         def params = [
                 uri:  'https://api.streamlabswater.com/v1/locations/' + state.SL_location.locationId,
                 headers: ['Authorization': 'Bearer ' + appSettings.api_key],
@@ -223,8 +237,8 @@ def initSL_Locations() {
                 if(!existingDevice) {
                     //def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow", state.SL_location.locationId, null, [name: "Device.${deviceId}", label: device.name, completedSetup: true])
                     def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow DH", 
-                          state.SL_location.locationId, null, [name: "Streamlabs Water Flow", 
-                          label: "Streamlabs Water Flow", completedSetup: true])
+                          state.SL_location.locationId, null, [name: "Streamlabs Water Flow DH", 
+                          label: "Streamlabs Water Flow DH", completedSetup: true])
             		log.debug "StreamLabs SM initSL_Locations- device created with Id: ${state.SL_location.locationId} for SL_location: ${state.SL_location.name}"
                 } else {
             		log.error "StreamLabs SM initSL_Locations- device not created; already exists: ${existingDevice.getDeviceNetworkId()}"
@@ -299,6 +313,7 @@ Map retrievecloudData() {
 	log.debug "StreamLabs SM retrievecloudData called"
     //get latest data from cloud
     determinehomeAway()
+    determineFlows()
 	return ["todayFlow":state.todayFlow, "thisMonthFlow":state.thisMonthFlow, 
       "thisYearFlow":state.thisYearFlow, "homeAway":state.homeAway, "inAlert":state.inAlert]
 }
