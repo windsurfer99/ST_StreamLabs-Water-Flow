@@ -21,9 +21,12 @@ metadata {
         capability "refresh"
         command "changeToAway"
         command "changeToHome"
+        command "changeToPause"
+        command "changeToMonitor"
         attribute "todayFlow", "string"
         attribute "monthFlow", "string"
         attribute "yearFlow", "string"
+        attribute "suspend", "enum", ["pause", "monitor"] //tracks if user has requested to suspend leak alerts
         attribute "homeAway", "enum", ["home", "away"]
 	}
 
@@ -40,10 +43,17 @@ metadata {
 		standardTile("refresh", "capability.refresh", decoration: "flat", width: 2, height: 2, canChangeIcon: true) {
 			state "default", label:"Refresh", icon:"st.secondary.refresh", action:"refresh.refresh"
 		}
-		
+		standardTile("suspend", "device.suspend", decoration: "flat", width: 2, height: 2) {
+//			state "pause", label: "pause", icon:"st.sonos.play-btn", action:"changeToMonitor", backgroundColor:"#e86d13"
+//			state "monitor", label: "monitoring", defaultState:true, icon:"st.sonos.pause-btn", action:"changeToPause", backgroundColor:"#00A0DC"
+			state "pause", label: "Now paused", icon:"st.sonos.play-btn", action:"changeToMonitor"
+			state "monitor", label: "Now monitoring", defaultState:true, icon:"st.sonos.pause-btn", action:"changeToPause"
+		}		
 		standardTile("homeAway", "device.homeAway", decoration: "flat", width: 2, height: 2, canChangeIcon: true) {
-			state "home", icon:"st.nest.nest-home", defaultState:true, action:"changeToAway", backgroundColor:"#00A0DC"
-			state "away", icon:"st.nest.nest-away", action:"changeToHome", backgroundColor:"#CCCCCC"
+			state "home", icon:"st.nest.nest-home", defaultState:true, action:"changeToAway", backgroundColor:"#00A0DC", nextstate: "changingToAway"
+			state "away", icon:"st.nest.nest-away", action:"changeToHome", backgroundColor:"#CCCCCC", nextstate: "changingToHome"
+    		state "changingToAway", label:'Changing', icon:"st.nest.nest-away", backgroundColor:"#CCCCCC", nextState: "changingToHome"
+    		state "changingToHome", label:'Changing', icon:"st.nest.nest-home", backgroundColor:"#00A0DC", nextState: "changingToAway"
 		}
 		
 		valueTile("todayFlow", "device.todayFlow", decoration: "flat", height: 2, width: 2) {
@@ -63,23 +73,53 @@ metadata {
 		}
 
 		main "water"
-		details(["water", "homeAway", "refresh", "todayFlow", "monthFlow", "yearFlow"])
+		details(["water", "homeAway", "suspend", "refresh", "todayFlow", "monthFlow", "yearFlow"])
+    }
+    preferences {
+        input name: "pauseDelay", type: "number", title: "Number", description: "# of minutes for max. pause:", required: false
 	}
 }
 //required implementations
-def initialize(){
-	state.init = true
+def installed() {
+	log.debug "StreamLabs DH installed"
+	initialize()
+//    refresh()
+}
+
+def initialize() {
+	log.debug "StreamLabs DH initialize with pause timeout: ${pauseDelay}"
+    schedule("0 0/10 * * * ?", poll) //refresh every 10 minutes
+	sendEvent(name: "suspend", value: "monitor")
+    state.wetDry = "dry"
+//    device.suspend = "monitor"
+//    refresh()
+}
+
+def updated(){
+	log.debug "StreamLabs DH updated"
+	unschedule("poll")
+    initialize()
+}
+
+def uninstalled() {
+	log.debug "StreamLabs DH uninstalled called for ${device.deviceNetworkId}"
+    //delete me from parent Service Manager; this will leave in a strange state until parent recreates me
+    if (state.init == true){
+		parent.deleteSmartLabsDevice(device.deviceNetworkId)
+    }
+    state.init = false
 }
 
 // parse events into attributes; not really used with this type of Device Handler
 def parse(String description) {
 	log.debug "Parsing '${description}'"
-	// TODO: handle 'water' attribute
 
 }
-//poll for changes; framework calls every 10 minutes
+//poll for changes and update locally; framework is supposed to call every 10 minutes but doesn't seem to
+//so scheduled internally, this is the handler for that
 def poll() {
 	log.debug "StreamLabs DH poll called"
+    refresh()
 	//sendCmdtoServer('{"system":{"get_sysinfo":{}}}', "deviceCommand", "commandResponse")
 }
 
@@ -102,16 +142,8 @@ def refresh(){
 	//runIn(2, getPower)
 }
 
-def uninstalled() {
-	log.debug "StreamLabs DH uninstalled called for ${device.deviceNetworkId}"
-    //delete me from parent Service Manager; this will leave in a strange state until parent recreates me
-    if (state.init == true){
-		parent.deleteSmartLabsDevice(device.deviceNetworkId)
-    }
-    state.init = false
-}
-
 //actions
+
 //Tile action to change StreamLabs to home
 def changeToHome() {
 	log.debug "StreamLabs DH changeToHome called"
@@ -124,9 +156,42 @@ def changeToAway() {
 	parent.updateAway("away")
 }
 
+//Tile action (& suspend time limit action) to re-enble monitoring StreamLabs for alerts
+def changeToMonitor() {
+	log.debug "StreamLabs DH changeToMonitor called"
+	sendEvent(name: "suspend", value: "monitor")
+	sendEvent(name: "water", value: state.wetDry) //update real status in case it had been suspended
+}
+
+//Tile action to pause monitoring StreamLabs for alerts
+def changeToPause() {
+	log.debug "StreamLabs DH changeToPause called"
+	sendEvent(name: "suspend", value: "pause")
+    if (pauseDelay > 0) {//if user wants a time limit on suspending alerts
+	    runIn (pauseDelay*60, "changeToMonitor")
+    }
+}
+
 //handle Events sent from Service Manager; typically wet & dry
 def generateEvent(Map results) {
 	log.debug "StreamLabs DH generateEvent parameters: '${results}'"
 	sendEvent(results)
 	return null
+}
+
+//Typically called by parent: update to "wet"
+def changeWaterToWet() {
+	log.debug "StreamLabs DH changeWaterToWet called"
+    state.wetDry = "wet"
+    if (suspend == "monitor") { //update only if not paused
+		sendEvent(name = "water" , value = "wet")
+	}
+}
+
+//Typically called by parent: update to "dry"
+def changeWaterToDry() {
+	log.debug "StreamLabs DH changeWaterToDry called"
+    state.wetDry = "dry"
+    //update even if paused
+	sendEvent(name = "water" , value = "dry")
 }
