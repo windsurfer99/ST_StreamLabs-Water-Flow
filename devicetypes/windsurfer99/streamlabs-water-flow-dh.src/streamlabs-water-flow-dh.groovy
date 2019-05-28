@@ -81,8 +81,12 @@ metadata {
 }
 //required implementations
 def installed() {
-	log.debug "StreamLabs DH installed"
-	initialize()
+	log.debug "StreamLabs DH installed; state.init: ${state.init}"
+//    if (state.init != true){
+//    	state.init = true
+//		runIn(2,"initialize")
+		initialize()
+//    }
 //    refresh()
 }
 
@@ -91,6 +95,7 @@ def initialize() {
     schedule("0 0/10 * * * ?", poll) //refresh every 10 minutes
 	sendEvent(name: "suspend", value: "monitor")
     state.wetDry = "dry"
+//   	state.init = true
 //    device.suspend = "monitor"
 //    refresh()
 }
@@ -100,19 +105,20 @@ def updated(){
 	unschedule("poll")
     initialize()
 }
-
+/*
 def uninstalled() {
 	log.debug "StreamLabs DH uninstalled called for ${device.deviceNetworkId}"
     //delete me from parent Service Manager; this will leave in a strange state until parent recreates me
-    if (state.init == true){
-		parent.deleteSmartLabsDevice(device.deviceNetworkId)
-    }
-    state.init = false
+//    if (state.init == true){
+	parent.deleteSmartLabsDevice(device.deviceNetworkId)
+//    }
+//    state.init = false
 }
+*/
 
 // parse events into attributes; not really used with this type of Device Handler
 def parse(String description) {
-	log.debug "Parsing '${description}'"
+	log.debug "StreamLabs DH- parse called with '${description}'"
 
 }
 //poll for changes and update locally; framework is supposed to call every 10 minutes but doesn't seem to
