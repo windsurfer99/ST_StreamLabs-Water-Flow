@@ -53,7 +53,7 @@ def updated() {
 
 	unsubscribe()
     cleanup()
-    runIn(2, "initialize") //deleteChildDevice seems to take a while to delete; wait before re-creating
+    runIn(10, "initialize") //deleteChildDevice seems to take a while to delete; wait before re-creating
 	//initialize()
 }
 
@@ -81,14 +81,15 @@ def initialize() {
 }
 
 def uninstalled() {
-	if(state.init) {
-		log.debug "StreamLabs SM uninstalled called after initialized"
+//	if(state.init) {
+		log.debug "StreamLabs SM uninstalled called"
  		cleanup()
-    } else {
-		log.debug "StreamLabs SM uninstalled called but ignored- after uninstall"
-    }
-    state.init = false
+//    } else {
+//		log.debug "StreamLabs SM uninstalled called but ignored- after uninstall"
+//    }
+//    state.init = false
 }
+
 
 //remove things
 def cleanup() {
@@ -320,6 +321,7 @@ Map retrievecloudData() {
 
 //delete cild device; called by child device to remove itself. Seems unnecessary but documentation says to do this
 def	deleteSmartLabsDevice(deviceid) {
+    log.debug "StreamLabs SM deleteSmartLabsDevice called with deviceid: ${deviceid}"
     def SL_Devices = getChildDevices()
     SL_Devices.each {
     	if (it.deviceNetworkId == deviceid) {
@@ -334,5 +336,10 @@ def	deleteSmartLabsDevice(deviceid) {
         }
     }
 }
+
+def testfromchild() {
+    log.debug "StreamLabs SM testfromchild called"
+}
+
 
 
