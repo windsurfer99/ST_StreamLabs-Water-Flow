@@ -44,17 +44,20 @@ def installed() {
 	// get the value of api key
 	def mySecret = appSettings.api_key
     //log.debug "Modes: $SL_awayModes"
+    state.enteredLocName = SL_locName //save off the location name entered by user
 	initialize()
 }
 
 
 def updated() {
-	log.debug "StreamLabs SM updated with settings: ${settings}"
-
-	unsubscribe()
-    cleanup()
-    runIn(10, "initialize") //deleteChildDevice seems to take a while to delete; wait before re-creating
-	//initialize()
+    if (state.enteredLocName != SL_locName) { //if location name changed, need to make a new device
+		log.debug "StreamLabs SM updated called- new device with settings: ${settings}"
+        unsubscribe()
+        cleanup()
+    	runIn(10, "initialize") //deleteChildDevice seems to take a while to delete; wait before re-creating
+    } else {
+		log.debug "StreamLabs SM updated called- same name, no new device with settings: ${settings}"
+    }
 }
 
 def initialize() {
@@ -63,7 +66,6 @@ def initialize() {
     state.childDevice = null
     state.inAlert = false
     state.homeAway = "home"
-    state.init = true
     subscribe(location, "mode", modeChangeHandler)
     initSL_Locations() //determine Streamlabs location to use
     if (state.SL_location) { 
@@ -72,22 +74,17 @@ def initialize() {
     	def existingDevice = getChildDevice(state.SL_location?.locationId)
         existingDevice?.generateEvent(eventData)
         state.inAlert =  false
-        schedule("0 0/1 * * * ?", pollSLAlert) //Poll Streamlabs cloud for leak alert
+        schedule("0 0/3 * * * ?", pollSLAlert) //Poll Streamlabs cloud for leak alert
 	    //runEvery1Minute(pollSLAlert) //Poll Streamlabs cloud for leak alert
-        runIn(3,"initDevice") //update once things are initialized
+        runIn(8,"initDevice") //update once things are initialized
         //determineFlows() //get current flow totals from cloud
         //existingDevice?.refresh()
     }
 }
 
 def uninstalled() {
-//	if(state.init) {
-		log.debug "StreamLabs SM uninstalled called"
- 		cleanup()
-//    } else {
-//		log.debug "StreamLabs SM uninstalled called but ignored- after uninstall"
-//    }
-//    state.init = false
+    log.debug "StreamLabs SM uninstalled called"
+    cleanup()
 }
 
 
@@ -125,15 +122,13 @@ def pollSLAlert() {
                 def resp_data = resp.data
                 def SL_locationsAlert = resp_data.alerts[0]
                 if (SL_locationsAlert) {
-                    if (!state.inAlert){
-                        //new alert, send wet event to child device handler
-                        log.debug "StreamLabs SM new pollSLAlert Alert0 received: ${SL_locationsAlert}; call changeWaterToWet"
-                        existingDevice?.changeWaterToWet()
-                        state.inAlert =  true
-                    }
+                    //send wet event to child device handler every poll to ensure not lost due to handler pausing
+                    log.debug "StreamLabs SM pollSLAlert Alert0 received: ${SL_locationsAlert}; call changeWaterToWet"
+                    existingDevice?.changeWaterToWet()
+                    state.inAlert =  true
                 } else {
                     if (state.inAlert){
-                        //alert removed, send dry event to child device handler
+                        //alert removed, send dry event to child device handler only once
                         log.debug "StreamLabs SM pollSLAlert Alert0 deactivated ; call changeWaterToDry"
                         existingDevice?.changeWaterToDry()
                         state.inAlert =  false
@@ -224,7 +219,8 @@ def initSL_Locations() {
             def ttl = resp_data.total
             log.debug "StreamLabs SM initSL_Locations- total SL_locations: ${ttl}"
             resp.data.locations.each{ SL_loc->
-                if (SL_loc.name == SL_locName) {
+//                if (SL_loc.name == SL_locName) {
+                if (SL_loc.name.equalsIgnoreCase(SL_locName)) { //Let user enter without worrying about case
                 	state.SL_location = SL_loc
                 }
             }
@@ -315,6 +311,7 @@ Map retrievecloudData() {
     //get latest data from cloud
     determinehomeAway()
     determineFlows()
+    pollSLAlert()
 	return ["todayFlow":state.todayFlow, "thisMonthFlow":state.thisMonthFlow, 
       "thisYearFlow":state.thisYearFlow, "homeAway":state.homeAway, "inAlert":state.inAlert]
 }
