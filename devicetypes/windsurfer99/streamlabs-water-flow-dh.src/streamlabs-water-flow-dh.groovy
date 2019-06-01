@@ -81,21 +81,18 @@ metadata {
 }
 //required implementations
 def installed() {
-	log.debug "StreamLabs DH installed; state.init: ${state.init}"
-//    if (state.init != true){
-//    	state.init = true
-//		runIn(2,"initialize")
-		initialize()
-//    }
+	log.debug "StreamLabs DH installed; "
+
+	runIn(7,"initialize")
+	//initialize()
 //    refresh()
 }
 
 def initialize() {
 	log.debug "StreamLabs DH initialize with pause timeout: ${pauseDelay}"
     schedule("0 0/10 * * * ?", poll) //refresh every 10 minutes
-	sendEvent(name: "suspend", value: "monitor")
-    state.wetDry = "dry"
-//   	state.init = true
+	generateEvent([name:"suspend", value:"monitor"])
+    state.wetDry = "dry" //real status even if paused
 //    device.suspend = "monitor"
 //    refresh()
 }
@@ -103,16 +100,13 @@ def initialize() {
 def updated(){
 	log.debug "StreamLabs DH updated"
 	unschedule("poll")
-    initialize()
+	runIn(7,"initialize")
 }
 /*
 def uninstalled() {
 	log.debug "StreamLabs DH uninstalled called for ${device.deviceNetworkId}"
     //delete me from parent Service Manager; this will leave in a strange state until parent recreates me
-//    if (state.init == true){
 	parent.deleteSmartLabsDevice(device.deviceNetworkId)
-//    }
-//    state.init = false
 }
 */
 
@@ -126,26 +120,24 @@ def parse(String description) {
 def poll() {
 	log.debug "StreamLabs DH poll called"
     refresh()
-	//sendCmdtoServer('{"system":{"get_sysinfo":{}}}', "deviceCommand", "commandResponse")
 }
 
 def refresh(){
 	def cloudData = parent.retrievecloudData() 
-	log.debug "StreamLabs DH refresh- cloudData: ${cloudData}"
+	log.debug "StreamLabs DH refresh- cloudData: ${cloudData}, suspend: ${device.currentValue("suspend")}"
     state.todayFlow = cloudData.todayFlow
     state.thisMonthFlow = cloudData.thisMonthFlow
     state.thisYearFlow = cloudData.thisYearFlow
     state.homeAway = cloudData.homeAway
     state.wetDry = cloudData.inAlert ? "wet" : "dry"
+    if (device.currentValue("suspend") != "pause") { //update only if not paused
+		generateEvent([name:"water", value:state.wetDry])
+    }
 
 	sendEvent(name: "todayFlow", value: Math.round(cloudData.todayFlow))
 	sendEvent(name: "monthFlow", value: Math.round(cloudData.thisMonthFlow))
 	sendEvent(name: "yearFlow", value: Math.round(cloudData.thisYearFlow))
-	sendEvent(name: "water", value: state.wetDry)
 	sendEvent(name: "homeAway", value: cloudData.homeAway)
-
-	//sendCmdtoServer('{"system":{"get_sysinfo":{}}}', "deviceCommand", "commandResponse")
-	//runIn(2, getPower)
 }
 
 //actions
@@ -165,14 +157,15 @@ def changeToAway() {
 //Tile action (& suspend time limit action) to re-enble monitoring StreamLabs for alerts
 def changeToMonitor() {
 	log.debug "StreamLabs DH changeToMonitor called"
-	sendEvent(name: "suspend", value: "monitor")
-	sendEvent(name: "water", value: state.wetDry) //update real status in case it had been suspended
+	generateEvent([name:"suspend", value:"monitor"])
+	generateEvent([name:"water", value:state.wetDry]) //update real status in case it had been suspended
 }
 
 //Tile action to pause monitoring StreamLabs for alerts
 def changeToPause() {
 	log.debug "StreamLabs DH changeToPause called"
-	sendEvent(name: "suspend", value: "pause")
+	generateEvent([name:"suspend", value:"pause"])
+	generateEvent([name:"water", value:"dry"]) //remove wet while paused
     if (pauseDelay > 0) {//if user wants a time limit on suspending alerts
 	    runIn (pauseDelay*60, "changeToMonitor")
     }
@@ -180,17 +173,18 @@ def changeToPause() {
 
 //handle Events sent from Service Manager; typically wet & dry
 def generateEvent(Map results) {
-	log.debug "StreamLabs DH generateEvent parameters: '${results}'"
+	log.debug "StreamLabs DH generateEvent called with parameters: '${results}'"
 	sendEvent(results)
 	return null
 }
 
 //Typically called by parent: update to "wet"
 def changeWaterToWet() {
-	log.debug "StreamLabs DH changeWaterToWet called"
+	def suspension = device.currentValue("suspend")
+	log.debug "StreamLabs DH changeWaterToWet called with suspend: ${suspension}"
     state.wetDry = "wet"
-    if (suspend == "monitor") { //update only if not paused
-		sendEvent(name = "water" , value = "wet")
+    if (suspension != "pause") { //update tile displayed info only if not paused
+		generateEvent([name:"water", value:"wet"])
 	}
 }
 
@@ -199,5 +193,5 @@ def changeWaterToDry() {
 	log.debug "StreamLabs DH changeWaterToDry called"
     state.wetDry = "dry"
     //update even if paused
-	sendEvent(name = "water" , value = "dry")
+	generateEvent([name:"water", value:"dry"])
 }
