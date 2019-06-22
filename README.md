@@ -5,6 +5,7 @@ The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud int
 ## Obtaining Source Code
 You can either use the traditional cut-and-paste method or integration with GitHub and provided it to the SmartThings IDE. For additional information, some suggested documentation are
  - [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)
+ - [FAQ: Github Integration How to Add and Update from Repositories](https://community.smartthings.com/t/faq-github-integration-how-to-add-and-update-from-repositories/39046)
 
 
 L 
@@ -92,7 +93,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkyNDMyNzg2OSwtNDg5NzI4Mzc1LDYzOT
+eyJoaXN0b3J5IjpbMTc5NzY5MzU4NiwtNDg5NzI4Mzc1LDYzOT
 g2MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3
 MSw2NDEyNzExNjJdfQ==
 -->
