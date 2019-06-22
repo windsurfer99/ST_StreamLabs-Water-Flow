@@ -3,7 +3,8 @@ This is an unofficial Classic SmartThings interface to the StreamLabs Water Flow
 ## Getting Started
 The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud interfaces, it requires two pieces: both a Device Handler and a Service Manager (SmartApp). You will need to obtain the groovy source code for both from GitHub and install them into the SmartThings IDE.
 ## Obtaining Source Code
-You can either use the traditional cut-and-paste method or integration with GitHub and provided it to the SmartThings IDE. For additional information, some suggested documentation are [# [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)](https://www.streamlabswater.com/)
+You can either use the traditional cut-and-paste method or integration with GitHub and provided it to the SmartThings IDE. For additional information, some suggested documentation are
+ - [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)
 
 
 L 
@@ -91,7 +92,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODUyNDg3MzE3LC00ODk3MjgzNzUsNjM5OD
-YyNzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcx
-LDY0MTI3MTE2Ml19
+eyJoaXN0b3J5IjpbMTkyNDMyNzg2OSwtNDg5NzI4Mzc1LDYzOT
+g2MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3
+MSw2NDEyNzExNjJdfQ==
 -->
