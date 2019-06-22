@@ -5,9 +5,9 @@ The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud int
 ### Obtaining Source Code & IDE Installation
 You can either use the traditional cut-and-paste method or integration with GitHub to provide the source code to the SmartThings IDE. If using GitHub integration, you will need the following information: Owner=windsurfer99, Name=ST_StreamLabs-Water-Flow, Branch=master.  For additional information on these standard SmartThings practices, some suggested documentation includes:
  - [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)
- - [FAQ: Github Integration How to Add and Update from Repositories](https://community.smartthings.com/t/faq-github-integration-how-to-add-and-update-from-repositories/39046)
+ - [FAQ: GitHub Integration How to Add and Update from Repositories](https://community.smartthings.com/t/faq-github-integration-how-to-add-and-update-from-repositories/39046)
 ### Getting an API Key
-You will need to request an API key for your account from StreamLabs. As of the ime of creatinFollow the instructions on the [Streamlabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. This interface supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that.
+You will need to request an API key for your account from StreamLabs. As of my initial creation, the API was free but there are indications that there may be a cost in the future. Follow the instructions on the [StreamLabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. This interface supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that.
 ### Prerequisites
 
 What things you need to install the software and how to install them
@@ -88,7 +88,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUxNzc1OTk1LC0xODUyNzY2NDcsLTQ4OT
-cyODM3NSw2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1
-LDExMzQ1NzY0NzEsNjQxMjcxMTYyXX0=
+eyJoaXN0b3J5IjpbLTg1MDM2MTMxMywtMTg1Mjc2NjQ3LC00OD
+k3MjgzNzUsNjM5ODYyNzEzLDY2NDg4MzE0NywtMTExNjg0MTI3
+NSwxMTM0NTc2NDcxLDY0MTI3MTE2Ml19
 -->
