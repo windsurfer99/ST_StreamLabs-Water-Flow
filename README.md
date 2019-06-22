@@ -11,7 +11,7 @@ You will need to request an API key for your account from StreamLabs. As of my i
 ### Install API Key
 After installing the Device Handler and Service Manager and then receiving the key from StreamLabs, it must be entered into the Service Manager.  In the SmartThings IDE, select the newly installed "StreamLabs Water Flow SM" on the "My SmartApps" page. Select "App Settings" in upper right of the  page. Expand "Settings" and enter "api_key" in the name box (if not already populated) and the provided key in the value box. select "Update' on the bottom of the page.
 ### Phone App Installation
-Use the standard SmartApp installation methods to install the Service Manager. That is, go to the "Automation" page and the "SmartApps" tab. Scroll to the bottom and select "Add a SmartApp". At the bottom, select "My Apps"
+Use the standard SmartApp installation methods to install the Service Manager. That is, go to the "Automation" page and the "SmartApps" tab. Scroll to the bottom and select "Add a SmartApp". At the bottom, select "My Apps". Select the "StreamLabs Water Flow SM". Configure the Service Manager
 
 ### Prerequisites
 
@@ -93,7 +93,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMzNjIxMTI3NCwtMTI0MjEyNDc3MywtMT
+eyJoaXN0b3J5IjpbLTI2MDkwMDUwNywtMTI0MjEyNDc3MywtMT
 g1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYyNzEzLDY2NDg4MzE0
 NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLDY0MTI3MTE2Ml19
 -->
