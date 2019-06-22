@@ -26,9 +26,15 @@ This is an optional value to control the level of logging in the IDE. Normally t
 ### Device Handler Installation
 As stated previously, the Device Handler will be automatically installed; you should not manually install it. If you remove the Service Manager, the Device Handler will be automatically removed also. After the Device Handler has been installed, the following options are available (Press the gear in the Handler to modify these):
 Give your Device a Name
+Number
+IDE Live Logging Level
 
 
 ### Device Handler User Interface
+Home/Away
+Pause
+Refresh
+U
 
 
 ## Running the tests
@@ -85,8 +91,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjIyNjc4ODIsLTE5NTYyNDY1MTksLT
-EyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5NzI4Mzc1LDYzOTg2
-MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3MS
-w2NDEyNzExNjJdfQ==
+eyJoaXN0b3J5IjpbMTU4MDc4Nzc0LC0xOTU2MjQ2NTE5LC0xMj
+QyMTI0NzczLC0xODUyNzY2NDcsLTQ4OTcyODM3NSw2Mzk4NjI3
+MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LDExMzQ1NzY0NzEsNj
+QxMjcxMTYyXX0=
 -->
