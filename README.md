@@ -1,5 +1,8 @@
 # ST_StreamLabs-Water-Flow
 StreamLabs Water Flow Meter interface for SmartThings
+This is an unofficial Python library for the [Streamlabs Water Monitor](https://www.streamlabswater.com/).
+
+This library can be used to retrieve water usage and manage the away mode of your location.
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -84,5 +87,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEzNDU3NjQ3MSw2NDEyNzExNjJdfQ==
+eyJoaXN0b3J5IjpbLTkxNjA0NTc1LDExMzQ1NzY0NzEsNjQxMj
+cxMTYyXX0=
 -->
