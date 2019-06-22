@@ -1,9 +1,9 @@
 # ST_StreamLabs-Water-Flow
 This is an unofficial Classic SmartThings interface to the StreamLabs Water Flow Meter [Streamlabs Water Monitor](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks.
 ## Getting Started
-The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud interfaces, it requires two pieces: both a Device Handler and a Service Manager (SmartApp). You will need to obtain the groovy source code for both from GitHub and install them into the SmartThings IDE.
+The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud interfaces, it requires two pieces: both a Device Handler and a Service Manager (a special kind of SmartApp). You will need to obtain the groovy source code for both from GitHub and install them into the SmartThings IDE.
 ### Obtaining Source Code & IDE Installation
-You can either use the traditional cut-and-paste method or integration with GitHub to provide the source code to the SmartThings IDE. The Device Handler is called "" and the Service Manager/If using GitHub integration, you will need the following information: Owner=windsurfer99, Name=ST_StreamLabs-Water-Flow, Branch=master.  For additional information on these standard SmartThings practices, some suggested documentation includes:
+You can either use the traditional cut-and-paste method or integration with GitHub to provide the source code to the SmartThings IDE. The Device Handler is called "" and the Service Manager/SmartApp is called ""StreamLabs Water Flow SM"". If using GitHub integration, you will need the following information: Owner=windsurfer99, Name=ST_StreamLabs-Water-Flow, Branch=master.  For additional information on these standard SmartThings practices, some suggested documentation includes:
  - [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)
  - [FAQ: GitHub Integration How to Add and Update from Repositories](https://community.smartthings.com/t/faq-github-integration-how-to-add-and-update-from-repositories/39046)
 ### Getting an API Key
@@ -90,7 +90,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTYwNzc4NDQsLTE4NTI3NjY0NywtND
+eyJoaXN0b3J5IjpbLTEyNDIxMjQ3NzMsLTE4NTI3NjY0NywtND
 g5NzI4Mzc1LDYzOTg2MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEy
 NzUsMTEzNDU3NjQ3MSw2NDEyNzExNjJdfQ==
 -->
