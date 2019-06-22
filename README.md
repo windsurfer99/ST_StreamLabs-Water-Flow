@@ -15,7 +15,7 @@ Use the standard SmartApp installation methods to install the Service Manager. T
 #### Assign Name for Service Manager
 By default, the name will be "StreamLabs Water Flow SM". This can be changed if desired with this entry. Also this allows (untested) for a second Service Manager to be installed with a unique name to handle a home that has 2 SmartLabs devices.
 #### Enter SmartThings modes when water meter should be away
-This allows you to optionally control the Home/Away status of the StreamLabs Water Meter from SmartThings. If nothing is checked, SmartThings will not automatically control the Home/Away status. Alternately, one or more SmartThings modes can be selected. When SmartThings mode changes to one of the selected items, then the StreamLabs status will be changed to "Away". Refer to the StreamLabs documentation on this functionality.
+This allows you to optionally control the Home/Away status of the StreamLabs Water Meter from SmartThings. If nothing is checked, SmartThings will not automatically control the Home/Away status. Alternately, one or more SmartThings modes can be selected. When SmartThings mode changes to one of the selected items, then the StreamLabs status will be changed to "Away". Refer to the StreamLabs documentation on this functionality but in a nutshell, when it is "Away" a flow alert is posted after about 15 seconds of any 
 #### Enter StreamLabs location name assigned to Streamlabs flow meter
 #### IDE Logging Level.
 
@@ -99,8 +99,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcwODIxMzk0OSwtMTk1NjI0NjUxOSwtMT
-I0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYy
-NzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLD
-Y0MTI3MTE2Ml19
+eyJoaXN0b3J5IjpbNDQ0NDE3NjczLC0xOTU2MjQ2NTE5LC0xMj
+QyMTI0NzczLC0xODUyNzY2NDcsLTQ4OTcyODM3NSw2Mzk4NjI3
+MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LDExMzQ1NzY0NzEsNj
+QxMjcxMTYyXX0=
 -->
