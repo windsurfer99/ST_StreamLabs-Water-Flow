@@ -7,7 +7,9 @@ You can either use the traditional cut-and-paste method or integration with GitH
  - [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)
  - [FAQ: GitHub Integration How to Add and Update from Repositories](https://community.smartthings.com/t/faq-github-integration-how-to-add-and-update-from-repositories/39046)
 ### Getting an API Key
-You will need to request an API key for your account from StreamLabs. As of my initial creation, the API was free but there are indications that there may be a cost in the future. Follow the instructions on the [StreamLabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. This interface supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that.
+You will need to request an API key for your account from StreamLabs. As of my initial creation, the API was free but there are indications that there may be a cost in the future. Follow the instructions on the [StreamLabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. My interface supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that.
+### Install API Key
+
 ### Prerequisites
 
 What things you need to install the software and how to install them
@@ -88,7 +90,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1MDM2MTMxMywtMTg1Mjc2NjQ3LC00OD
-k3MjgzNzUsNjM5ODYyNzEzLDY2NDg4MzE0NywtMTExNjg0MTI3
-NSwxMTM0NTc2NDcxLDY0MTI3MTE2Ml19
+eyJoaXN0b3J5IjpbODMzMzc0MTcwLC0xODUyNzY2NDcsLTQ4OT
+cyODM3NSw2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1
+LDExMzQ1NzY0NzEsNjQxMjcxMTYyXX0=
 -->
