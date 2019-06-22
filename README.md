@@ -13,7 +13,7 @@ After installing the Device Handler and Service Manager and then receiving the k
 ### Phone App Installation
 Use the standard SmartApp installation methods to install the Service Manager. That is, go to the "Automation" page and the "SmartApps" tab. Scroll to the bottom and select "Add a SmartApp". At the bottom, select "My Apps". Select the "StreamLabs Water Flow SM". Configure the Service Manager. The following provides additional information on the options.
 #### Assign Name for Service Manager
-By default, the name will be "StreamLabs Water Flow SM". This can be changed if desired with this entry. Also this allows
+By default, the name will be "StreamLabs Water Flow SM". This can be changed if desired with this entry. Also this allows (untested) for a second Service Manager to be installed with a unique name to handle a home that has 
 #### Enter SmartThings modes when water meter should be away
 #### Enter StreamLabs location name assigned to Streamlabs flow meter
 #### IDE Logging Level.
@@ -98,8 +98,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTYyNDY1MTksLTEyNDIxMjQ3NzMsLT
-E4NTI3NjY0NywtNDg5NzI4Mzc1LDYzOTg2MjcxMyw2NjQ4ODMx
-NDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3MSw2NDEyNzExNjJdfQ
-==
+eyJoaXN0b3J5IjpbMTk3OTg5OTc0NywtMTk1NjI0NjUxOSwtMT
+I0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYy
+NzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLD
+Y0MTI3MTE2Ml19
 -->
