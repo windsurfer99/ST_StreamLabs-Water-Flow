@@ -1,5 +1,5 @@
 # ST_StreamLabs-Water-Flow
-This is an unofficial Classic SmartThings interface to the [StreamLabs Smart Home Water Meter](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks. This allows StreamLabs alerts to be interfaced to other SmartApps such as Smart Home Monitor. Note that the ability to delay (Pause) SmartThings declaring a water leak from a StreamLabs alert is possible with this implementation.
+This is an unofficial Classic SmartThings interface to the [StreamLabs Smart Home Water Meter](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks. This allows StreamLabs alerts to be interfaced to other SmartApps such as Smart Home Monitor. Note that the ability to delay (Pause) SmartThings declaring a water leak from a StreamLabs alert is an added feature of this implementation.
 
 Note that these modules are not intended to replace StreamLab's Phone Apps but to just provide an interface to SmartThings.
 ## Getting Started
@@ -97,7 +97,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkyMDg0OTYxMiwxNjMwOTU1NzE4LC0xOT
+eyJoaXN0b3J5IjpbLTYwMTQ1NzMzMSwxNjMwOTU1NzE4LC0xOT
 U2MjQ2NTE5LC0xMjQyMTI0NzczLC0xODUyNzY2NDcsLTQ4OTcy
 ODM3NSw2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LD
 ExMzQ1NzY0NzEsNjQxMjcxMTYyXX0=
