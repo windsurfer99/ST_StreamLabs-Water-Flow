@@ -17,8 +17,9 @@ By default, the name will be "StreamLabs Water Flow SM". This can be changed if 
 #### Enter SmartThings modes when water meter should be away
 This allows you to optionally control the Home/Away status of the StreamLabs Water Meter from SmartThings. If nothing is checked, SmartThings will not automatically control the Home/Away status. Alternately, one or more SmartThings modes can be selected. When SmartThings mode changes to one of the selected items, then the StreamLabs status will be changed to "Away". Refer to the StreamLabs documentation on this functionality but in a nutshell, when it is "Away" a flow alert is posted after about 15 seconds of any amount of water flow. When "Home" than an alert is posted based on user defined parameters.
 #### Enter StreamLabs location name assigned to Streamlabs flow meter
-When the StreamLabs device is installed, a name is given to the location
+When the StreamLabs device is installed, a name is given to the location. This location name needs to be entered here so that it can be found. It is not case sensitive.
 #### IDE Logging Level.
+This is an optional value to control the level of logging in the IDE. Normally this can be 
 
 ### Prerequisites
 
@@ -100,8 +101,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTExMTk0NDAyLC0xOTU2MjQ2NTE5LC0xMj
-QyMTI0NzczLC0xODUyNzY2NDcsLTQ4OTcyODM3NSw2Mzk4NjI3
-MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LDExMzQ1NzY0NzEsNj
-QxMjcxMTYyXX0=
+eyJoaXN0b3J5IjpbLTEwNTA3MDQ2NjEsLTE5NTYyNDY1MTksLT
+EyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5NzI4Mzc1LDYzOTg2
+MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3MS
+w2NDEyNzExNjJdfQ==
 -->
