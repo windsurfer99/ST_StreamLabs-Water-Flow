@@ -3,7 +3,7 @@ This is an unofficial Classic SmartThings interface to the [StreamLabs Smart Hom
 ## Getting Started
 The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud interfaces, it requires two pieces: both a Device Handler and a Service Manager (a special kind of SmartApp). You will need to obtain the groovy source code for both from GitHub and install them into the SmartThings IDE.
 ### Obtaining Source Code & IDE Installation
-You can either use the traditional cut-and-paste method or integration with GitHub to provide the source code to the SmartThings IDE. The Device Handler is called "StreamLabs Water Flow DH" and the Service Manager/SmartApp is called ""StreamLabs Water Flow SM"". If using GitHub integration, you will need the following information: Owner=windsurfer99, Name=ST_StreamLabs-Water-Flow, Branch=master.  Both the Device Handler and Service Manager should be set to 'Published' so the the For additional information on these standard SmartThings practices, some suggested documentation includes:
+You can either use the traditional cut-and-paste method or integration with GitHub to provide the source code to the SmartThings IDE. The Device Handler is called "StreamLabs Water Flow DH" and the Service Manager/SmartApp is called ""StreamLabs Water Flow SM"". If using GitHub integration, you will need the following information: Owner=windsurfer99, Name=ST_StreamLabs-Water-Flow, Branch=master.  Both the Device Handler and Service Manager should be set to 'Published' so the the Phone App can install them. For additional information on these standard SmartThings installation practices, some suggested documentation includes:
  - [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)
  - [FAQ: GitHub Integration How to Add and Update from Repositories](https://community.smartthings.com/t/faq-github-integration-how-to-add-and-update-from-repositories/39046)
 ### Getting an API Key
@@ -15,6 +15,7 @@ Use the standard SmartApp installation methods to install the Service Manager. T
 #### Assign Name for Service Manager
 By default, the name will be "StreamLabs Water Flow SM". This can be changed if desired with this entry. Also this allows (untested) for a second Service Manager to be installed with a unique name to handle a home that has 2 SmartLabs devices.
 #### Enter SmartThings modes when water meter should be away
+This allows you to optionally control the  Home/Away status of the StreamLabs
 #### Enter StreamLabs location name assigned to Streamlabs flow meter
 #### IDE Logging Level.
 
@@ -98,8 +99,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwMDA2MTU5OCwtMTk1NjI0NjUxOSwtMT
-I0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYy
-NzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLD
-Y0MTI3MTE2Ml19
+eyJoaXN0b3J5IjpbLTE4MjYwMjA5ODEsLTE5NTYyNDY1MTksLT
+EyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5NzI4Mzc1LDYzOTg2
+MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3MS
+w2NDEyNzExNjJdfQ==
 -->
