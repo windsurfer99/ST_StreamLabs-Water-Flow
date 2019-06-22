@@ -1,5 +1,5 @@
 # ST_StreamLabs-Water-Flow
-This is an unofficial StreamLabs Water Flow Meter [Streamlabs Water Monitor](https://www.streamlabswater.com/) interface for SmartThings. 
+This is an unofficial StreamLabs Water Flow Meter [Streamlabs Water Monitor](https://www.streamlabswater.com/) interface for SmartThings. It allows SmartThings to be able to control the StreamLabs Home/Away status as well as receiving flow alerts
 
 This library can be used to retrieve water usage and manage the away mode of your location.
 ## Getting Started
@@ -86,6 +86,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU4MDQ0MjcyOCwxMTM0NTc2NDcxLDY0MT
-I3MTE2Ml19
+eyJoaXN0b3J5IjpbLTExMTY4NDEyNzUsMTEzNDU3NjQ3MSw2ND
+EyNzExNjJdfQ==
 -->
