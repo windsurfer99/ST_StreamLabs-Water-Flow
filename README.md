@@ -24,7 +24,9 @@ When the StreamLabs device is installed, a name is given to the location. This l
 This is an optional value to control the level of logging in the IDE. Normally this can be unset unless debugging is desired.
 
 ### Device Handler Installation
-As stated previously, the Device Handler will be automatically installed; you should not manually install it. If you remove the Service Manager, the Device Handler will be automatically removed also. After the Device Handler has been installed, the following options
+As stated previously, the Device Handler will be automatically installed; you should not manually install it. If you remove the Service Manager, the Device Handler will be automatically removed also. After the Device Handler has been installed, the following options are available (Press the gear in the Handler to modify these):
+Give your Device a Name
+
 
 ### Device Handler User Interface
 
@@ -83,7 +85,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MzAzNjIyNDcsLTE5NTYyNDY1MTksLT
+eyJoaXN0b3J5IjpbLTEwMjIyNjc4ODIsLTE5NTYyNDY1MTksLT
 EyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5NzI4Mzc1LDYzOTg2
 MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3MS
 w2NDEyNzExNjJdfQ==
