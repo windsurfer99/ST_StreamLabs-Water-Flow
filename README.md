@@ -1,4 +1,4 @@
-# ST_StreamLabs-Water-Flow
+# ST_StreamLabs-Water-Flow Interface for SmartThings
 StreamLabs Water Flow Meter interface for SmartThings
 This is an unofficial Python library for the [Streamlabs Water Monitor](https://www.streamlabswater.com/).
 
@@ -87,6 +87,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkxNjA0NTc1LDExMzQ1NzY0NzEsNjQxMj
+eyJoaXN0b3J5IjpbMzc0Njc5Mzc3LDExMzQ1NzY0NzEsNjQxMj
 cxMTYyXX0=
 -->
