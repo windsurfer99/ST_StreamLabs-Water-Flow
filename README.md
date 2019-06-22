@@ -9,7 +9,7 @@ You can either use the traditional cut-and-paste method or integration with GitH
 ### Getting an API Key
 You will need to request an API key for your account from StreamLabs. As of my initial creation, the API was free but there are indications that there may be a cost in the future. Follow the instructions on the [StreamLabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. My interface supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that.
 ### Install API Key
-
+After receiving the key from StreamLabs, in the SmartThings IDE
 ### Prerequisites
 
 What things you need to install the software and how to install them
@@ -90,7 +90,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODMzMzc0MTcwLC0xODUyNzY2NDcsLTQ4OT
-cyODM3NSw2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1
-LDExMzQ1NzY0NzEsNjQxMjcxMTYyXX0=
+eyJoaXN0b3J5IjpbMTg0MjM3NDA3OCwtMTg1Mjc2NjQ3LC00OD
+k3MjgzNzUsNjM5ODYyNzEzLDY2NDg4MzE0NywtMTExNjg0MTI3
+NSwxMTM0NTc2NDcxLDY0MTI3MTE2Ml19
 -->
