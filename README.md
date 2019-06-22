@@ -1,9 +1,9 @@
 # ST_StreamLabs-Water-Flow
-This is an unofficial Classic SmartThings interface to the [StreamLabs Smart Home Water Meter](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks. This allows StreamLabs alerts to be interfaced to other SmartApps such as Smart Home Monitor. Note that these modules are not intended to replace StreamLab's Phone Apps
+This is an unofficial Classic SmartThings interface to the [StreamLabs Smart Home Water Meter](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks. This allows StreamLabs alerts to be interfaced to other SmartApps such as Smart Home Monitor. Note that these modules are not intended to replace StreamLab's Phone Apps but to just provide an interface to SmartThings.
 ## Getting Started
 The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud interfaces, it requires two pieces: both a Device Handler and a Service Manager (a special kind of SmartApp). You will need to obtain the groovy source code for both from GitHub and install them into the SmartThings IDE.
 ### Obtaining Source Code & IDE Installation
-You can either use the traditional cut-and-paste method or integration with GitHub to provide the source code to the SmartThings IDE. The Device Handler is called "StreamLabs Water Flow DH" and the Service Manager/SmartApp is called ""StreamLabs Water Flow SM"". If using GitHub integration, you will need the following information: Owner=windsurfer99, Name=ST_StreamLabs-Water-Flow, Branch=master.  For additional information on these standard SmartThings practices, some suggested documentation includes:
+You can either use the traditional cut-and-paste method or integration with GitHub to provide the source code to the SmartThings IDE. The Device Handler is called "StreamLabs Water Flow DH" and the Service Manager/SmartApp is called ""StreamLabs Water Flow SM"". If using GitHub integration, you will need the following information: Owner=windsurfer99, Name=ST_StreamLabs-Water-Flow, Branch=master.  Both the Device Handler and Service Manager should be set to 'Published' so the the For additional information on these standard SmartThings practices, some suggested documentation includes:
  - [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)
  - [FAQ: GitHub Integration How to Add and Update from Repositories](https://community.smartthings.com/t/faq-github-integration-how-to-add-and-update-from-repositories/39046)
 ### Getting an API Key
@@ -98,8 +98,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI5NTgyMzEwLC0xOTU2MjQ2NTE5LC0xMj
-QyMTI0NzczLC0xODUyNzY2NDcsLTQ4OTcyODM3NSw2Mzk4NjI3
-MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LDExMzQ1NzY0NzEsNj
-QxMjcxMTYyXX0=
+eyJoaXN0b3J5IjpbLTYwMDA2MTU5OCwtMTk1NjI0NjUxOSwtMT
+I0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYy
+NzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLD
+Y0MTI3MTE2Ml19
 -->
