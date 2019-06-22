@@ -23,13 +23,8 @@ When the StreamLabs device is installed, a name is given to the location. This l
 #### IDE Logging Level.
 This is an optional value to control the level of logging in the IDE. Normally this can be unset unless debugging is desired.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+### Device Handler
+As stated previously, the Device Handler will be automatically installed; you should not manually install it. If you remove the Service Manager, the Device Handler will be automatically removed also.
 
 ### Installing
 
@@ -103,8 +98,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY1MjQyMjQyNiwtMTk1NjI0NjUxOSwtMT
-I0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYy
-NzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLD
-Y0MTI3MTE2Ml19
+eyJoaXN0b3J5IjpbNzYwMTI0OTQsLTE5NTYyNDY1MTksLTEyND
+IxMjQ3NzMsLTE4NTI3NjY0NywtNDg5NzI4Mzc1LDYzOTg2Mjcx
+Myw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3MSw2ND
+EyNzExNjJdfQ==
 -->
