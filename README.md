@@ -1,5 +1,5 @@
 # ST_StreamLabs-Water-Flow
-This is an unofficial Classic SmartThings interface to the StreamLabs Smart Home Water Meter [Streamlabs Water Monitor](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks.
+This is an unofficial Classic SmartThings interface to the [StreamLabs Smart Home Water Meter](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks.
 ## Getting Started
 The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud interfaces, it requires two pieces: both a Device Handler and a Service Manager (a special kind of SmartApp). You will need to obtain the groovy source code for both from GitHub and install them into the SmartThings IDE.
 ### Obtaining Source Code & IDE Installation
@@ -98,8 +98,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyOTUwMjE2MzUsLTE5NTYyNDY1MTksLT
-EyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5NzI4Mzc1LDYzOTg2
-MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3MS
-w2NDEyNzExNjJdfQ==
+eyJoaXN0b3J5IjpbMTExMTY2MzM1OCwtMTk1NjI0NjUxOSwtMT
+I0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYy
+NzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLD
+Y0MTI3MTE2Ml19
 -->
