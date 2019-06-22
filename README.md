@@ -23,26 +23,11 @@ When the StreamLabs device is installed, a name is given to the location. This l
 #### IDE Logging Level.
 This is an optional value to control the level of logging in the IDE. Normally this can be unset unless debugging is desired.
 
-### Device Handler
-As stated previously, the Device Handler will be automatically installed; you should not manually install it. If you remove the Service Manager, the Device Handler will be automatically removed also.
+### Device Handler Installation
+As stated previously, the Device Handler will be automatically installed; you should not manually install it. If you remove the Service Manager, the Device Handler will be automatically removed also. After the Device Handler has been installed, the following options
 
-### Installing
+### Device Handler User Interface
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
@@ -98,8 +83,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzYwMTI0OTQsLTE5NTYyNDY1MTksLTEyND
-IxMjQ3NzMsLTE4NTI3NjY0NywtNDg5NzI4Mzc1LDYzOTg2Mjcx
-Myw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3MSw2ND
-EyNzExNjJdfQ==
+eyJoaXN0b3J5IjpbLTE4MzAzNjIyNDcsLTE5NTYyNDY1MTksLT
+EyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5NzI4Mzc1LDYzOTg2
+MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3MS
+w2NDEyNzExNjJdfQ==
 -->
