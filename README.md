@@ -2,17 +2,12 @@
 This is an unofficial Classic SmartThings interface to the StreamLabs Water Flow Meter [Streamlabs Water Monitor](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks.
 ## Getting Started
 The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud interfaces, it requires two pieces: both a Device Handler and a Service Manager (SmartApp). You will need to obtain the groovy source code for both from GitHub and install them into the SmartThings IDE.
-### Obtaining Source Code
+### Obtaining Source Code & IDE Installation
 You can either use the traditional cut-and-paste method or integration with GitHub to provide the source code to the SmartThings IDE. If using GitHub integration, you will need the following information: Owner=windsurfer99, Name=ST_StreamLabs-Water-Flow, Branch=master.  For additional information on these standard SmartThings practices, some suggested documentation includes:
  - [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)
  - [FAQ: Github Integration How to Add and Update from Repositories](https://community.smartthings.com/t/faq-github-integration-how-to-add-and-update-from-repositories/39046)
-
-
-L 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Getting an API Key
-You will need to do is request an API key for your account. Follow the instructions on the [Streamlabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. This interface supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that.
+You will need to request an API key for your account from StreamLabs. As of the ime of creatinFollow the instructions on the [Streamlabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. This interface supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that.
 ### Prerequisites
 
 What things you need to install the software and how to install them
@@ -93,7 +88,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NTI3NjY0NywtNDg5NzI4Mzc1LDYzOT
-g2MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3NjQ3
-MSw2NDEyNzExNjJdfQ==
+eyJoaXN0b3J5IjpbLTUxNzc1OTk1LC0xODUyNzY2NDcsLTQ4OT
+cyODM3NSw2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1
+LDExMzQ1NzY0NzEsNjQxMjcxMTYyXX0=
 -->
