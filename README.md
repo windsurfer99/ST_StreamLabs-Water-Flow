@@ -1,9 +1,12 @@
 # ST_StreamLabs-Water-Flow
-This is an unofficial SmartThings interface to the StreamLabs Water Flow Meter [Streamlabs Water Monitor](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing flow alerts as water leaks.
+This is an unofficial SmartThings interface to the StreamLabs Water Flow Meter [Streamlabs Water Monitor](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks.
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+### Getting an API Key
+
+The first thing you will need to do is request an API key for your account. Follow the instructions on the [Streamlabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. The library supports the API key mode of authentication, so make sure you follow the steps to request that (OAUTH2 is not currently supported).
 ### Prerequisites
 
 What things you need to install the software and how to install them
@@ -84,6 +87,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0Nzk3OTMxMiwtMTExNjg0MTI3NSwxMT
+eyJoaXN0b3J5IjpbMTI2OTEwMDYxNywtMTExNjg0MTI3NSwxMT
 M0NTc2NDcxLDY0MTI3MTE2Ml19
 -->
