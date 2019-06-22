@@ -28,9 +28,9 @@ As stated previously, the Device Handler will be automatically installed; you sh
 #### Give your Device a Name
 Allows you to change the name of the Device Handler from its default.
 #### # of minutes for Pause
-This feature (along with the User Interface) allows for pau
+This feature (along with the User Interface) allows for pausing a StreamLabs alert from registering a SmartThings water leak. This is how long the pause will stay in effect.
 #### IDE Live Logging Level
-
+This is an optional value to control the level of logging in the IDE. Normally this can be unset unless debugging is desired.
 
 ### Device Handler User Interface
 #### Home/Away
@@ -95,8 +95,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMDQzNTY1NjAsMTYzMDk1NTcxOCwtMT
-k1NjI0NjUxOSwtMTI0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3
-MjgzNzUsNjM5ODYyNzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NS
-wxMTM0NTc2NDcxLDY0MTI3MTE2Ml19
+eyJoaXN0b3J5IjpbODA4NDc3OTksMTYzMDk1NTcxOCwtMTk1Nj
+I0NjUxOSwtMTI0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3Mjgz
+NzUsNjM5ODYyNzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NSwxMT
+M0NTc2NDcxLDY0MTI3MTE2Ml19
 -->
