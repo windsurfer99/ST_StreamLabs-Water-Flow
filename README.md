@@ -34,7 +34,9 @@ IDE Live Logging Level
 Home/Away
 Pause
 Refresh
-U
+Usage Today
+Usage This Month
+Usage This Year
 
 
 ## Running the tests
@@ -91,8 +93,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU4MDc4Nzc0LC0xOTU2MjQ2NTE5LC0xMj
-QyMTI0NzczLC0xODUyNzY2NDcsLTQ4OTcyODM3NSw2Mzk4NjI3
-MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LDExMzQ1NzY0NzEsNj
-QxMjcxMTYyXX0=
+eyJoaXN0b3J5IjpbMTYzMDk1NTcxOCwtMTk1NjI0NjUxOSwtMT
+I0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYy
+NzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLD
+Y0MTI3MTE2Ml19
 -->
