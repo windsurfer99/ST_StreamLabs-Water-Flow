@@ -5,7 +5,7 @@ This is an unofficial SmartThings interface to the StreamLabs Water Flow Meter [
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Getting an API Key
-You will need to do is request an API key for your account. Follow the instructions on the [Streamlabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. The library supports the API key mode of authentication, so make sure you follow the steps to request that (OAUTH2 is not currently supported).
+You will need to do is request an API key for your account. Follow the instructions on the [Streamlabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. This interface supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that.
 ### Prerequisites
 
 What things you need to install the software and how to install them
@@ -86,6 +86,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjM0MTY1OTYsLTExMTY4NDEyNzUsMT
-EzNDU3NjQ3MSw2NDEyNzExNjJdfQ==
+eyJoaXN0b3J5IjpbNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LDExMz
+Q1NzY0NzEsNjQxMjcxMTYyXX0=
 -->
