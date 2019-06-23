@@ -39,7 +39,7 @@ The following paragraphs describe the user interface elements.
 #### Home/Away
 This icon provides a graphical representation of the StreamLabs Home/Away status. The Home/Away status defines different algorithms within the Water Meter to determine if there is a leak. This icon is also a button; pressing it will toggle the StreamLabs status. Note that if one or more SmartThings modes have been set in the Service Manager configuration to control this status, toggling the status with this button will only be temporary until the next SmartThings mode change.
 #### Pause
-This is a f
+This is a feature totally separate from the StreamLabs cloud. If you anticipate using a water flow that would exceed the set 
 #### Refresh
 #### Usage Today
 #### Usage This Month
@@ -78,7 +78,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NTQ3OTU2OTUsNDMwMzg1NTUxLC02OT
+eyJoaXN0b3J5IjpbLTE5NzkwMTExMTYsNDMwMzg1NTUxLC02OT
 gyNjc2NjcsLTYwMTQ1NzMzMSwxNjMwOTU1NzE4LC0xOTU2MjQ2
 NTE5LC0xMjQyMTI0NzczLC0xODUyNzY2NDcsLTQ4OTcyODM3NS
 w2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LDExMzQ1
