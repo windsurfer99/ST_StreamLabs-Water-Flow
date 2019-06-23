@@ -19,7 +19,7 @@ Once the Service Manager is installed, it will search the StreamLabs cloud for t
 #### Assign Name for Service Manager
 By default, the name will be "StreamLabs Water Flow SM". This can be changed if desired with this entry. Also this allows (untested) for a second Service Manager to be installed with a unique name to handle a home that has 2 SmartLabs devices.
 #### Enter SmartThings modes when water meter should be away
-This allows you to optionally control the Home/Away status of the StreamLabs Water Meter from SmartThings. If nothing is checked, SmartThings will not automatically control the Home/Away status. Alternately, one or more SmartThings modes can be selected. When SmartThings mode changes to one of the selected items, then the StreamLabs status will be changed to "Away". Refer to the StreamLabs documentation on this functionality but in a nutshell, when it is "Away" a flow alert is posted after about 15 seconds of any amount of water flow. When "Home" than an alert is posted based on user defined parameters.
+This allows you to optionally control the Home/Away status of the StreamLabs Water Meter from SmartThings. If nothing is checked, SmartThings will not automatically control the Home/Away status. Alternately, one or more SmartThings modes can be selected. When SmartThings mode changes to one of the selected items, then the StreamLabs status will be changed to "Away". When the mode changes to one notRefer to the StreamLabs documentation on this functionality but in a nutshell, when it is "Away" a flow alert is posted after about 15 seconds of any amount of water flow. When "Home" than an alert is posted based on user defined parameters.
 #### Enter StreamLabs location name assigned to Streamlabs flow meter
 When the StreamLabs device is installed, a name is given to the location. This location name needs to be entered here so that it can be found. It is not case sensitive.
 #### IDE Logging Level.
@@ -63,10 +63,10 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * While I have ample software experience, this is my first attempt at SmartThings programming; hopefully I have adhered to most Best Practices.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI3OTUzOTIzNiwxMzY4OTIwNTkxLC04NT
-EwNDE0NzksMTE3MTg2NzU3NywtMTM4OTYyNDcyNyw0MzAzODU1
-NTEsLTY5ODI2NzY2NywtNjAxNDU3MzMxLDE2MzA5NTU3MTgsLT
-E5NTYyNDY1MTksLTEyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5
-NzI4Mzc1LDYzOTg2MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNz
-UsMTEzNDU3NjQ3MSw2NDEyNzExNjJdfQ==
+eyJoaXN0b3J5IjpbOTEwMjY5MjM3LDEzNjg5MjA1OTEsLTg1MT
+A0MTQ3OSwxMTcxODY3NTc3LC0xMzg5NjI0NzI3LDQzMDM4NTU1
+MSwtNjk4MjY3NjY3LC02MDE0NTczMzEsMTYzMDk1NTcxOCwtMT
+k1NjI0NjUxOSwtMTI0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3
+MjgzNzUsNjM5ODYyNzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NS
+wxMTM0NTc2NDcxLDY0MTI3MTE2Ml19
 -->
