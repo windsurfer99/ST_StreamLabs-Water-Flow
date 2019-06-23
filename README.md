@@ -13,7 +13,7 @@ You will need to request an API key for your account from StreamLabs. As of my i
 ### Install API Key
 After installing the Device Handler and Service Manager and then receiving the key from StreamLabs, the key must be entered into the Service Manager.  In the SmartThings IDE, select the newly installed "StreamLabs Water Flow SM" on the "My SmartApps" page. Select "App Settings" in upper right of the  page. Expand "Settings" on the App Settings page and enter "api_key" in the name box (if not already populated) and the provided key in the value box. select "Update' on the bottom of the page.
 ### Phone App Service Manager Installation
-Use the standard SmartApp installation methods to install the Service Manager in the Phone App. That is, go to the "Automation" page and the "SmartApps" tab. Scroll to the bottom and select "Add a SmartApp". At the bottom, select "My Apps". Select the "StreamLabs Water Flow SM". Configure the Service Manager. The following sections provide additional information on the options.
+You may wantUse the standard SmartApp installation methods to install the Service Manager in the Phone App. That is, go to the "Automation" page and the "SmartApps" tab. Scroll to the bottom and select "Add a SmartApp". At the bottom, select "My Apps". Select the "StreamLabs Water Flow SM". Configure the Service Manager. The following sections provide additional information on the options.
 
 Once the Service Manager is installed, it will search the StreamLabs cloud for the Water Meter. If it is found, the Device Handler will then be automatically installed within about 30 seconds.
 #### Assign Name for Service Manager
@@ -23,7 +23,7 @@ This allows you to optionally control the Home/Away status of the StreamLabs Wat
 #### Enter StreamLabs location name assigned to StreamLabs flow meter
 When the StreamLabs device is installed, you provided a name to be given to the location. This location name needs to be entered here so that it can be found. It is not case sensitive.
 #### IDE Logging Level.
-This is an optional value to control the level of logging in the IDE. Normally this can be unset unless debugging is desired.
+This is an optional value to control the level of logging in the IDE. Normally this can be left alone unless extensive debugging is desired.
 
 ### Device Handler Installation
 As stated previously, the Device Handler will be automatically installed; you should not manually install it. If you remove the Service Manager, the Device Handler will be automatically removed also. After the Device Handler has been installed, the following options are available (Press the gear in the Handler to modify these):
@@ -63,10 +63,10 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * While I have ample software experience, this is my first attempt at SmartThings programming; hopefully I have adhered to most Best Practices.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyOTg3MTA3NCwxMzY4OTIwNTkxLC04NT
-EwNDE0NzksMTE3MTg2NzU3NywtMTM4OTYyNDcyNyw0MzAzODU1
-NTEsLTY5ODI2NzY2NywtNjAxNDU3MzMxLDE2MzA5NTU3MTgsLT
-E5NTYyNDY1MTksLTEyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5
-NzI4Mzc1LDYzOTg2MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNz
-UsMTEzNDU3NjQ3MSw2NDEyNzExNjJdfQ==
+eyJoaXN0b3J5IjpbLTE3ODcxNjcwNzQsMTM2ODkyMDU5MSwtOD
+UxMDQxNDc5LDExNzE4Njc1NzcsLTEzODk2MjQ3MjcsNDMwMzg1
+NTUxLC02OTgyNjc2NjcsLTYwMTQ1NzMzMSwxNjMwOTU1NzE4LC
+0xOTU2MjQ2NTE5LC0xMjQyMTI0NzczLC0xODUyNzY2NDcsLTQ4
+OTcyODM3NSw2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMj
+c1LDExMzQ1NzY0NzEsNjQxMjcxMTYyXX0=
 -->
