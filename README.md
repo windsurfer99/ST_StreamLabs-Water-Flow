@@ -45,13 +45,14 @@ This is a feature totally separate from the StreamLabs cloud. If you anticipate 
 #### Refresh
 This button requests an update from the StreamLabs cloud of water usage and Home/Away.
 #### Usage Today
-This displays the 
+This displays the gallons used today (as reported by the StreamLabs cloud).
 #### Usage This Month
+This displays the gallons used this calendar month (as reported by the StreamLabs cloud).
 #### Usage This Year
-
-
+This displays the gallons used this calendar year (as reported by the StreamLabs cloud).
 ## Idiosyncrasies
 ### Polling
+
 ### Water Usage
 
 
@@ -82,7 +83,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkzNjUwOTc5MywxMTcxODY3NTc3LC0xMz
+eyJoaXN0b3J5IjpbMTA1NDA2MDkwNywxMTcxODY3NTc3LC0xMz
 g5NjI0NzI3LDQzMDM4NTU1MSwtNjk4MjY3NjY3LC02MDE0NTcz
 MzEsMTYzMDk1NTcxOCwtMTk1NjI0NjUxOSwtMTI0MjEyNDc3My
 wtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYyNzEzLDY2NDg4
