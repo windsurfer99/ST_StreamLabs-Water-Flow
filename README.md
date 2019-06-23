@@ -1,5 +1,5 @@
 # ST_StreamLabs-Water-Flow
-This is an unofficial Classic SmartThings interface to the [StreamLabs Smart Home Water Meter](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks. This allows StreamLabs alerts to be interfaced to other SmartApps such as Smart Home Monitor. Note that the ability to delay (Pause) SmartThings declaring a water leak from a StreamLabs alert is an added feature of this implementation.
+This is an unofficial **Classic** SmartThings interface to the [StreamLabs Smart Home Water Meter](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts as SmartThings water leaks. This allows StreamLabs alerts to be interfaced to other SmartApps such as Smart Home Monitor. Note that the ability to delay (Pause) SmartThings declaring a water leak from a StreamLabs alert is an added feature of this implementation.
 
 Note that these modules are not intended to replace StreamLab's Phone Apps but to just provide an interface to SmartThings.
 ## Getting Started
@@ -60,13 +60,13 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 ## Acknowledgments
 
 * Hat tip to codersaur for his code to control the IDE logging.
-* While I have ample software experience, this is my first attempt at SmartThings programming
-* etc
+* While I have ample software experience, this is my first attempt at SmartThings programming; hopefully I have adhered to most Best Practices.
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM1OTMwMDUyLDExNzE4Njc1NzcsLTEzOD
-k2MjQ3MjcsNDMwMzg1NTUxLC02OTgyNjc2NjcsLTYwMTQ1NzMz
-MSwxNjMwOTU1NzE4LC0xOTU2MjQ2NTE5LC0xMjQyMTI0NzczLC
-0xODUyNzY2NDcsLTQ4OTcyODM3NSw2Mzk4NjI3MTMsNjY0ODgz
-MTQ3LC0xMTE2ODQxMjc1LDExMzQ1NzY0NzEsNjQxMjcxMTYyXX
-0=
+eyJoaXN0b3J5IjpbLTg1MTA0MTQ3OSwxMTcxODY3NTc3LC0xMz
+g5NjI0NzI3LDQzMDM4NTU1MSwtNjk4MjY3NjY3LC02MDE0NTcz
+MzEsMTYzMDk1NTcxOCwtMTk1NjI0NjUxOSwtMTI0MjEyNDc3My
+wtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYyNzEzLDY2NDg4
+MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLDY0MTI3MTE2Ml
+19
 -->
