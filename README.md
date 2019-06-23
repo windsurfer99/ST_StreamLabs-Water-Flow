@@ -11,7 +11,7 @@ You can either use the traditional cut-and-paste method or integration with GitH
 ### Getting an API Key
 You will need to request an API key for your account from StreamLabs. As of my initial interface creation, the API was free but there are indications that there may be a cost in the future. Follow the instructions on the [StreamLabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. My interface only supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that. This will take some days for StreamLabs to approve your request.
 ### Install API Key
-After installing the Device Handler and Service Manager and then receiving the key from StreamLabs, the key must be entered into the Service Manager.  In the SmartThings IDE, select the newly installed "StreamLabs Water Flow SM" on the "My SmartApps" page. Select "App Settings" in upper right of the  page. Expand "Settings" and enter "api_key" in the name box (if not already populated) and the provided key in the value box. select "Update' on the bottom of the page.
+After installing the Device Handler and Service Manager and then receiving the key from StreamLabs, the key must be entered into the Service Manager.  In the SmartThings IDE, select the newly installed "StreamLabs Water Flow SM" on the "My SmartApps" page. Select "App Settings" in upper right of the  page. Expand "Settings" on the App Settings page and enter "api_key" in the name box (if not already populated) and the provided key in the value box. select "Update' on the bottom of the page.
 ### Phone App Service Manager Installation
 Use the standard SmartApp installation methods to install the Service Manager. That is, go to the "Automation" page and the "SmartApps" tab. Scroll to the bottom and select "Add a SmartApp". At the bottom, select "My Apps". Select the "StreamLabs Water Flow SM". Configure the Service Manager. The following sections provide additional information on the options.
 
@@ -63,7 +63,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * While I have ample software experience, this is my first attempt at SmartThings programming; hopefully I have adhered to most Best Practices.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNjE1NTAxOCwxMzY4OTIwNTkxLC04NT
+eyJoaXN0b3J5IjpbMTc5OTU4OTgzNywxMzY4OTIwNTkxLC04NT
 EwNDE0NzksMTE3MTg2NzU3NywtMTM4OTYyNDcyNyw0MzAzODU1
 NTEsLTY5ODI2NzY2NywtNjAxNDU3MzMxLDE2MzA5NTU3MTgsLT
 E5NTYyNDY1MTksLTEyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5
