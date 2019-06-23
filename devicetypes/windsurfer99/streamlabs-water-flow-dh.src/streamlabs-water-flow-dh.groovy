@@ -71,7 +71,7 @@ metadata {
 		details(["water", "homeAway", "suspend", "refresh", "todayFlow", "monthFlow", "yearFlow"])
     }
     preferences {
-        input (name: "pauseDelay", type: "number", title: "# of minutes for pause", description: "# of minutes for max. pause:", required: false)
+        input (name: "pauseDelay", type: "number", title: "# of min. for pause", description: "# of minutes for max. pause:", required: false)
         input (name: "zwtLoggingLevelIDE",
             title: "IDE Live Logging Level:\nMessages with this level and higher will be logged to the IDE.",
             type: "enum",
