@@ -52,7 +52,7 @@ This displays the gallons used this calendar month (as reported by the StreamLab
 This displays the gallons used this calendar year (as reported by the StreamLabs cloud).
 ## Idiosyncrasies
 ### Polling
-
+I was not able to determine a method to subscribe for StreamLabs alerts using an API Key interface (I assume a mechanism doesn't 
 ### Water Usage
 
 
@@ -83,7 +83,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA1NDA2MDkwNywxMTcxODY3NTc3LC0xMz
+eyJoaXN0b3J5IjpbMTIyNTU2NTkyMywxMTcxODY3NTc3LC0xMz
 g5NjI0NzI3LDQzMDM4NTU1MSwtNjk4MjY3NjY3LC02MDE0NTcz
 MzEsMTYzMDk1NTcxOCwtMTk1NjI0NjUxOSwtMTI0MjEyNDc3My
 wtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYyNzEzLDY2NDg4
