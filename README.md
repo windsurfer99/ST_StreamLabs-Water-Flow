@@ -9,7 +9,7 @@ You can either use the traditional cut-and-paste method or integration with GitH
  - [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)
  - [FAQ: GitHub Integration How to Add and Update from Repositories](https://community.smartthings.com/t/faq-github-integration-how-to-add-and-update-from-repositories/39046)
 ### Getting an API Key
-You will need to request an API key for your account from StreamLabs. As of my initial interface creation, the API was free but there are indications that there may be a cost in the future. Follow the instructions on the [StreamLabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. My interface only supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that. This 
+You will need to request an API key for your account from StreamLabs. As of my initial interface creation, the API was free but there are indications that there may be a cost in the future. Follow the instructions on the [StreamLabs Getting Started](https://developer.streamlabswater.com/docs/getting-started.html) page to request your API key. My interface only supports the API key mode of authentication (OAUTH2 is not currently supported), so make sure you follow the steps to request that. This will take some days for StreamLabs to approve your request.
 ### Install API Key
 After installing the Device Handler and Service Manager and then receiving the key from StreamLabs, it must be entered into the Service Manager.  In the SmartThings IDE, select the newly installed "StreamLabs Water Flow SM" on the "My SmartApps" page. Select "App Settings" in upper right of the  page. Expand "Settings" and enter "api_key" in the name box (if not already populated) and the provided key in the value box. select "Update' on the bottom of the page.
 ### Phone App Service Manager Installation
@@ -63,10 +63,10 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * While I have ample software experience, this is my first attempt at SmartThings programming; hopefully I have adhered to most Best Practices.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTk4NjI0Mjk4LDEzNjg5MjA1OTEsLTg1MT
-A0MTQ3OSwxMTcxODY3NTc3LC0xMzg5NjI0NzI3LDQzMDM4NTU1
-MSwtNjk4MjY3NjY3LC02MDE0NTczMzEsMTYzMDk1NTcxOCwtMT
-k1NjI0NjUxOSwtMTI0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3
-MjgzNzUsNjM5ODYyNzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NS
-wxMTM0NTc2NDcxLDY0MTI3MTE2Ml19
+eyJoaXN0b3J5IjpbLTE2OTcyMTczNDUsMTM2ODkyMDU5MSwtOD
+UxMDQxNDc5LDExNzE4Njc1NzcsLTEzODk2MjQ3MjcsNDMwMzg1
+NTUxLC02OTgyNjc2NjcsLTYwMTQ1NzMzMSwxNjMwOTU1NzE4LC
+0xOTU2MjQ2NTE5LC0xMjQyMTI0NzczLC0xODUyNzY2NDcsLTQ4
+OTcyODM3NSw2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMj
+c1LDExMzQ1NzY0NzEsNjQxMjcxMTYyXX0=
 -->
