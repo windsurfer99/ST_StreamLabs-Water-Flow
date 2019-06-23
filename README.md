@@ -63,15 +63,11 @@ Give an example
 
 
 
-## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the Apache License 2.0 - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
@@ -79,7 +75,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU5OTYzOTA4NywtNjAxNDU3MzMxLDE2Mz
+eyJoaXN0b3J5IjpbLTY5ODI2NzY2NywtNjAxNDU3MzMxLDE2Mz
 A5NTU3MTgsLTE5NTYyNDY1MTksLTEyNDIxMjQ3NzMsLTE4NTI3
 NjY0NywtNDg5NzI4Mzc1LDYzOTg2MjcxMyw2NjQ4ODMxNDcsLT
 ExMTY4NDEyNzUsMTEzNDU3NjQ3MSw2NDEyNzExNjJdfQ==
