@@ -54,7 +54,7 @@ This displays the gallons used this calendar year (as reported by the StreamLabs
 ### Polling
 I was not able to determine a method to subscribe for StreamLabs alerts using an API Key interface (I assume a mechanism doesn't exist). Therefore the Service Manager polls the StreamLabs cloud every 3 minutes for a change in alerts. I picked this as a compromise to not overload the cloud but to also receive timely events.
 ### Water Usage
-The water usage displayed in 
+The water usage displayed in the Device Handler typically does not exactly match the usage displayed in the StreamLabs App. Based on a response in their forum, this is to be expected and is an artifact of their implementation
 
 
 Explain how to run the automated tests for this system
@@ -84,7 +84,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc0ODg5NzIyOSwxMTcxODY3NTc3LC0xMz
+eyJoaXN0b3J5IjpbMTkzNTkwMTgyMywxMTcxODY3NTc3LC0xMz
 g5NjI0NzI3LDQzMDM4NTU1MSwtNjk4MjY3NjY3LC02MDE0NTcz
 MzEsMTYzMDk1NTcxOCwtMTk1NjI0NjUxOSwtMTI0MjEyNDc3My
 wtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYyNzEzLDY2NDg4
