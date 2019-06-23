@@ -59,14 +59,14 @@ The water usage displayed in the Device Handler typically does not exactly match
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
+* Hat tip to codersaur for his code to control the IDE logging.
+* This is my first attempt at SmartThings progra
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyMjY3NzM2LDExNzE4Njc1NzcsLTEzOD
-k2MjQ3MjcsNDMwMzg1NTUxLC02OTgyNjc2NjcsLTYwMTQ1NzMz
-MSwxNjMwOTU1NzE4LC0xOTU2MjQ2NTE5LC0xMjQyMTI0NzczLC
-0xODUyNzY2NDcsLTQ4OTcyODM3NSw2Mzk4NjI3MTMsNjY0ODgz
-MTQ3LC0xMTE2ODQxMjc1LDExMzQ1NzY0NzEsNjQxMjcxMTYyXX
-0=
+eyJoaXN0b3J5IjpbMTg5NzUzNjczNiwxMTcxODY3NTc3LC0xMz
+g5NjI0NzI3LDQzMDM4NTU1MSwtNjk4MjY3NjY3LC02MDE0NTcz
+MzEsMTYzMDk1NTcxOCwtMTk1NjI0NjUxOSwtMTI0MjEyNDc3My
+wtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYyNzEzLDY2NDg4
+MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLDY0MTI3MTE2Ml
+19
 -->
