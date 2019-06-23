@@ -67,7 +67,7 @@ Give an example
 
 ## License
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
@@ -75,8 +75,9 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE.md](LIC
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY5ODI2NzY2NywtNjAxNDU3MzMxLDE2Mz
-A5NTU3MTgsLTE5NTYyNDY1MTksLTEyNDIxMjQ3NzMsLTE4NTI3
-NjY0NywtNDg5NzI4Mzc1LDYzOTg2MjcxMyw2NjQ4ODMxNDcsLT
-ExMTY4NDEyNzUsMTEzNDU3NjQ3MSw2NDEyNzExNjJdfQ==
+eyJoaXN0b3J5IjpbNDMwMzg1NTUxLC02OTgyNjc2NjcsLTYwMT
+Q1NzMzMSwxNjMwOTU1NzE4LC0xOTU2MjQ2NTE5LC0xMjQyMTI0
+NzczLC0xODUyNzY2NDcsLTQ4OTcyODM3NSw2Mzk4NjI3MTMsNj
+Y0ODgzMTQ3LC0xMTE2ODQxMjc1LDExMzQ1NzY0NzEsNjQxMjcx
+MTYyXX0=
 -->
