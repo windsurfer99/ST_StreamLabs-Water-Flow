@@ -3,7 +3,7 @@ This is an unofficial **Classic** SmartThings interface to the [StreamLabs Smart
 
 These modules are not intended to replace StreamLab's Phone Apps but to just provide an interface to SmartThings.
 ## Getting Started
-The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud interfaces, it requires two pieces: both a Device Handler and a Service Manager (a special kind of SmartApp). You will need to obtain the groovy source code for both from GitHub and install them into the SmartThings IDE.
+The StreamLabs API runs in the "cloud"; for SmartThings to interrogate cloud interfaces, it requires two pieces: both a Device Handler and a Service Manager (a special kind of SmartApp). You will need to obtain the groovy source code for both from GitHub and install them into the SmartThings IDE. You should also have already created a StreamLabs account and successfully installed the Water Meter with its App
 ### Obtaining Source Code & IDE Installation
 You can either use the traditional cut-and-paste method or integration with GitHub to provide the source code to the SmartThings IDE. The Device Handler is called "StreamLabs Water Flow DH" and the Service Manager/SmartApp is called "StreamLabs Water Flow SM". If using GitHub integration, you will need the following information: Owner=windsurfer99, Name=ST_StreamLabs-Water-Flow, Branch=master.  Both the Device Handler and Service Manager should be set to 'Published' so the the Phone App can install them. For additional information on these standard SmartThings installation practices, some suggested documentation includes:
  - [FAQ: An Overview of Using Custom Code in SmartThings (SmartThings Classic)](https://community.smartthings.com/t/faq-an-overview-of-using-custom-code-in-smartthings-smartthings-classic/16772)
@@ -63,10 +63,10 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * While I have ample software experience, this is my first attempt at SmartThings programming; hopefully I have adhered to most Best Practices.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM2ODkyMDU5MSwtODUxMDQxNDc5LDExNz
-E4Njc1NzcsLTEzODk2MjQ3MjcsNDMwMzg1NTUxLC02OTgyNjc2
-NjcsLTYwMTQ1NzMzMSwxNjMwOTU1NzE4LC0xOTU2MjQ2NTE5LC
-0xMjQyMTI0NzczLC0xODUyNzY2NDcsLTQ4OTcyODM3NSw2Mzk4
-NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LDExMzQ1NzY0Nz
-EsNjQxMjcxMTYyXX0=
+eyJoaXN0b3J5IjpbMTA4NDYxNzU2NiwxMzY4OTIwNTkxLC04NT
+EwNDE0NzksMTE3MTg2NzU3NywtMTM4OTYyNDcyNyw0MzAzODU1
+NTEsLTY5ODI2NzY2NywtNjAxNDU3MzMxLDE2MzA5NTU3MTgsLT
+E5NTYyNDY1MTksLTEyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5
+NzI4Mzc1LDYzOTg2MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNz
+UsMTEzNDU3NjQ3MSw2NDEyNzExNjJdfQ==
 -->
