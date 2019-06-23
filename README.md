@@ -37,7 +37,7 @@ This is an optional value to control the level of logging in the IDE. Normally t
 ### Device Handler User Interface
 The following paragraphs describe the user interface elements.
 #### Home/Away
-This icon provides a graphical representation of the StreamLabs Home/Away status. The Home/Away status defines
+This icon provides a graphical representation of the StreamLabs Home/Away status. The Home/Away status defines different algorithms within the Water Meter to determine if there is a leak. This icon is also a button; pressing it will toggle the StreamLabs status. Note that if
 #### Pause
 #### Refresh
 #### Usage Today
@@ -77,7 +77,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMTQzOTk1Niw0MzAzODU1NTEsLTY5OD
+eyJoaXN0b3J5IjpbMTg4OTcyNjAzMyw0MzAzODU1NTEsLTY5OD
 I2NzY2NywtNjAxNDU3MzMxLDE2MzA5NTU3MTgsLTE5NTYyNDY1
 MTksLTEyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5NzI4Mzc1LD
 YzOTg2MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3
