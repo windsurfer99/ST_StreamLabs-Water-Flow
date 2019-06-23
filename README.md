@@ -32,7 +32,7 @@ Allows you to change the name of the Device Handler from its default.
 #### # of minutes for Pause
 This entry (along with the User Interface) allows for pausing a StreamLabs alert from registering a SmartThings water leak. This is how long the pause will stay in effect.
 #### IDE Live Logging Level
-This is an optional value to control the level of logging in the IDE. Normally this can be unset unless debugging is desired.
+This is an optional value to control the level of logging in the IDE. Normally this can be left alone unless extensive debugging is desired.
 
 ### Device Handler User Interface
 The following paragraphs describe the user interface elements.
@@ -63,10 +63,10 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * While I have ample software experience, this is my first attempt at SmartThings programming; hopefully I have adhered to most Best Practices.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NzE1ODc3MjUsMTM2ODkyMDU5MSwtOD
-UxMDQxNDc5LDExNzE4Njc1NzcsLTEzODk2MjQ3MjcsNDMwMzg1
-NTUxLC02OTgyNjc2NjcsLTYwMTQ1NzMzMSwxNjMwOTU1NzE4LC
-0xOTU2MjQ2NTE5LC0xMjQyMTI0NzczLC0xODUyNzY2NDcsLTQ4
-OTcyODM3NSw2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMj
-c1LDExMzQ1NzY0NzEsNjQxMjcxMTYyXX0=
+eyJoaXN0b3J5IjpbMTIwMTU1ODA1LDEzNjg5MjA1OTEsLTg1MT
+A0MTQ3OSwxMTcxODY3NTc3LC0xMzg5NjI0NzI3LDQzMDM4NTU1
+MSwtNjk4MjY3NjY3LC02MDE0NTczMzEsMTYzMDk1NTcxOCwtMT
+k1NjI0NjUxOSwtMTI0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3
+MjgzNzUsNjM5ODYyNzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NS
+wxMTM0NTc2NDcxLDY0MTI3MTE2Ml19
 -->
