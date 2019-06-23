@@ -43,7 +43,10 @@ This is an optional value to control the level of logging in the IDE. Normally t
 #### Usage This Year
 
 
-## Running the tests
+## Idiosyncrasies
+### Polling
+### Water Usage
+
 
 Explain how to run the automated tests for this system
 
@@ -97,8 +100,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwMTQ1NzMzMSwxNjMwOTU1NzE4LC0xOT
-U2MjQ2NTE5LC0xMjQyMTI0NzczLC0xODUyNzY2NDcsLTQ4OTcy
-ODM3NSw2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LD
-ExMzQ1NzY0NzEsNjQxMjcxMTYyXX0=
+eyJoaXN0b3J5IjpbLTEyNDI3NjkwNiwtNjAxNDU3MzMxLDE2Mz
+A5NTU3MTgsLTE5NTYyNDY1MTksLTEyNDIxMjQ3NzMsLTE4NTI3
+NjY0NywtNDg5NzI4Mzc1LDYzOTg2MjcxMyw2NjQ4ODMxNDcsLT
+ExMTY4NDEyNzUsMTEzNDU3NjQ3MSw2NDEyNzExNjJdfQ==
 -->
