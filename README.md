@@ -37,8 +37,9 @@ This is an optional value to control the level of logging in the IDE. Normally t
 ### Device Handler User Interface
 The following paragraphs describe the user interface elements.
 #### Home/Away
-This icon provides a graphical representation of the StreamLabs Home/Away status. The Home/Away status defines different algorithms within the Water Meter to determine if there is a leak. This icon is also a button; pressing it will toggle the StreamLabs status. Note that if one or more SmartThings modes have been set in the Service Manager configuration to control this status, toggl
+This icon provides a graphical representation of the StreamLabs Home/Away status. The Home/Away status defines different algorithms within the Water Meter to determine if there is a leak. This icon is also a button; pressing it will toggle the StreamLabs status. Note that if one or more SmartThings modes have been set in the Service Manager configuration to control this status, toggling the status with this button will only be temporary until the next SmartThings mode change.
 #### Pause
+This is a f
 #### Refresh
 #### Usage Today
 #### Usage This Month
@@ -77,9 +78,9 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzczNTY5MDI2LDQzMDM4NTU1MSwtNjk4Mj
-Y3NjY3LC02MDE0NTczMzEsMTYzMDk1NTcxOCwtMTk1NjI0NjUx
-OSwtMTI0MjEyNDc3MywtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNj
-M5ODYyNzEzLDY2NDg4MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2
-NDcxLDY0MTI3MTE2Ml19
+eyJoaXN0b3J5IjpbLTE4NTQ3OTU2OTUsNDMwMzg1NTUxLC02OT
+gyNjc2NjcsLTYwMTQ1NzMzMSwxNjMwOTU1NzE4LC0xOTU2MjQ2
+NTE5LC0xMjQyMTI0NzczLC0xODUyNzY2NDcsLTQ4OTcyODM3NS
+w2Mzk4NjI3MTMsNjY0ODgzMTQ3LC0xMTE2ODQxMjc1LDExMzQ1
+NzY0NzEsNjQxMjcxMTYyXX0=
 -->
