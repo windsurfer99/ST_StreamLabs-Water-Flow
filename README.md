@@ -35,8 +35,9 @@ This entry (along with the User Interface) allows for pausing a StreamLabs alert
 This is an optional value to control the level of logging in the IDE. Normally this can be unset unless debugging is desired.
 
 ### Device Handler User Interface
-The following paragraphs describe the user interface 
+The following paragraphs describe the user interface elements.
 #### Home/Away
+This icon provides a graphical representation of the StreamLabs Home/Away status. The Home/Away status defines
 #### Pause
 #### Refresh
 #### Usage Today
@@ -76,7 +77,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEyMDQ2NjY1Niw0MzAzODU1NTEsLTY5OD
+eyJoaXN0b3J5IjpbLTEzMTQzOTk1Niw0MzAzODU1NTEsLTY5OD
 I2NzY2NywtNjAxNDU3MzMxLDE2MzA5NTU3MTgsLTE5NTYyNDY1
 MTksLTEyNDIxMjQ3NzMsLTE4NTI3NjY0NywtNDg5NzI4Mzc1LD
 YzOTg2MjcxMyw2NjQ4ODMxNDcsLTExMTY4NDEyNzUsMTEzNDU3
