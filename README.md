@@ -54,40 +54,19 @@ This displays the gallons used this calendar year (as reported by the StreamLabs
 ### Polling
 I was not able to determine a method to subscribe for StreamLabs alerts using an API Key interface (I assume a mechanism doesn't exist). Therefore the Service Manager polls the StreamLabs cloud every 3 minutes for a change in alerts. I picked this as a compromise to not overload the cloud but to also receive timely events.
 ### Water Usage
-The water usage displayed in the Device Handler typically does not exactly match the usage displayed in the StreamLabs App. Based on a response in their forum, this is to be expected and is an artifact of their implementation
-
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-
-
-
-
-
-
-
+The water usage displayed in the Device Handler typically does not exactly match the usage displayed in the StreamLabs App. Based on a response in their forum, this is to be expected and is an artifact of their implementation.
 ## License
-
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details
-
 ## Acknowledgments
 
 * Hat tip to anyone whose code was used
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkzNTkwMTgyMywxMTcxODY3NTc3LC0xMz
-g5NjI0NzI3LDQzMDM4NTU1MSwtNjk4MjY3NjY3LC02MDE0NTcz
-MzEsMTYzMDk1NTcxOCwtMTk1NjI0NjUxOSwtMTI0MjEyNDc3My
-wtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYyNzEzLDY2NDg4
-MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLDY0MTI3MTE2Ml
-19
+eyJoaXN0b3J5IjpbMTIyMjY3NzM2LDExNzE4Njc1NzcsLTEzOD
+k2MjQ3MjcsNDMwMzg1NTUxLC02OTgyNjc2NjcsLTYwMTQ1NzMz
+MSwxNjMwOTU1NzE4LC0xOTU2MjQ2NTE5LC0xMjQyMTI0NzczLC
+0xODUyNzY2NDcsLTQ4OTcyODM3NSw2Mzk4NjI3MTMsNjY0ODgz
+MTQ3LC0xMTE2ODQxMjc1LDExMzQ1NzY0NzEsNjQxMjcxMTYyXX
+0=
 -->
