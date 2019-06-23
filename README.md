@@ -41,9 +41,11 @@ This graphic at the top of the panel displays the current state of the Device: w
 #### Home/Away
 This icon provides a graphical representation of the StreamLabs Home/Away status. The Home/Away status defines different algorithms within the Water Meter to determine if there is a leak. This icon is also a button; pressing it will toggle the StreamLabs status. Note that if one or more SmartThings modes have been set in the Service Manager configuration to control this status, toggling the status with this button will only be temporary until the next SmartThings mode change.
 #### Pause
-This is a feature totally separate from the StreamLabs cloud. If you anticipate using a water flow that would exceed the trip settings in the StreamLabs App, you can press the "Pause" button. This will cause the Device Handler to ignore any StreamLabs alerts for the number of minutes set in the Device Handler configuration (# of minutes for Pause). Once the time limit is complete, if the StreamLabs is still in an alert condition, then the Device Handler will post a 'Wet' condition. Note that this button is also a icon displaying whether the Device Handler is paused or not. To cancel the pause, just press the button again. If the configuration parameter is 0 or empty, the pause will stay on until you press the button again (i.e., there is no timeout)
+This is a feature totally separate from the StreamLabs cloud. If you anticipate using a water flow that would exceed the trip settings in the StreamLabs App, you can press the "Pause" button. This will cause the Device Handler to ignore any StreamLabs alerts for the number of minutes set in the Device Handler configuration (# of minutes for Pause). Once the time limit is complete, if the StreamLabs is still in an alert condition, then the Device Handler will post a 'Wet' condition. Note that this button is also a icon displaying whether the Device Handler is paused or not. To cancel the pause, just press the button again. If the configuration parameter is 0 or not set, the pause will stay on until you press the button again (i.e., there is no timeout).
 #### Refresh
+This button requests an update from the StreamLabs cloud of water usage and Home/Away.
 #### Usage Today
+This displays the 
 #### Usage This Month
 #### Usage This Year
 
@@ -80,9 +82,10 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 * Inspiration
 * etc
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE3MTg2NzU3NywtMTM4OTYyNDcyNyw0Mz
-AzODU1NTEsLTY5ODI2NzY2NywtNjAxNDU3MzMxLDE2MzA5NTU3
-MTgsLTE5NTYyNDY1MTksLTEyNDIxMjQ3NzMsLTE4NTI3NjY0Ny
-wtNDg5NzI4Mzc1LDYzOTg2MjcxMyw2NjQ4ODMxNDcsLTExMTY4
-NDEyNzUsMTEzNDU3NjQ3MSw2NDEyNzExNjJdfQ==
+eyJoaXN0b3J5IjpbMTkzNjUwOTc5MywxMTcxODY3NTc3LC0xMz
+g5NjI0NzI3LDQzMDM4NTU1MSwtNjk4MjY3NjY3LC02MDE0NTcz
+MzEsMTYzMDk1NTcxOCwtMTk1NjI0NjUxOSwtMTI0MjEyNDc3My
+wtMTg1Mjc2NjQ3LC00ODk3MjgzNzUsNjM5ODYyNzEzLDY2NDg4
+MzE0NywtMTExNjg0MTI3NSwxMTM0NTc2NDcxLDY0MTI3MTE2Ml
+19
 -->
