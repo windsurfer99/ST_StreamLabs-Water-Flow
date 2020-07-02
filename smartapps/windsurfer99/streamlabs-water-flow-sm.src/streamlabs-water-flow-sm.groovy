@@ -37,9 +37,9 @@ preferences {
 		section("Inputs") {
         		paragraph ("You MUST set the API Key via App Settings in IDE")
             		label (title: "Assign a name for Service Manager", required: false, multiple: true)
-            		input (name: "SL_awayModes", type: "mode", title: "Enter SmartThings modes when water meter should be Away", 
+            		input (name: "SL_awayModes", type: "mode", title: "Enter SmartThings modes when water meter should be Away",
                     		multiple: true, required: false)
-            		input (name: "SL_locName", type: "text", title: "Enter Streamlabs location name assigned to Streamlabs flow meter", 
+            		input (name: "SL_locName", type: "text", title: "Enter Streamlabs location name assigned to Streamlabs flow meter",
                     		multiple: false, required: true)
                     input (name: "configLoggingLevelIDE",
                         title: "IDE Live Logging Level:\nMessages with this level and higher will be logged to the IDE.",
@@ -94,13 +94,14 @@ def initialize() {
     state.homeAway = "home"
     subscribe(location, "mode", modeChangeHandler)
     initSL_Locations() //determine Streamlabs location to use
-    if (state.SL_location) { 
+    if (state.SL_location) {
     	//we have a device; put it into initial state
         def eventData = [name: "water", value: "dry"]
     	def existingDevice = getChildDevice(state.SL_location?.locationId)
         existingDevice?.generateEvent(eventData)
         state.inAlert =  false
-        schedule("0 0/3 * * * ?", pollSLAlert) //Poll Streamlabs cloud for leak alert
+//        schedule("0 0/3 * * * ?", pollSLAlert) //Poll Streamlabs cloud for leak alert
+        schedule("0 0/1 * * * ?", pollSLAlert) //Poll Streamlabs cloud for leak alert
         runIn(8,"initDevice") //update once things are initialized
     }
 }
@@ -142,21 +143,39 @@ def pollSLAlert() {
         try {
             httpGet(params) {resp ->
     			logger("StreamLabs SM pollSLAlert resp.data: ${resp.data}","debug")
+                def SL_Leak_Found = false //initialize
                 def resp_data = resp.data
-                def SL_locationsAlert = resp_data.alerts[0]
-                if (SL_locationsAlert) {
-                    //send wet event to child device handler every poll to ensure not lost due to handler pausing
-    				logger("StreamLabs SM pollSLAlert Alert0 received: ${SL_locationsAlert}; call changeWaterToWet","info")
-                    existingDevice?.changeWaterToWet()
-                    state.inAlert =  true
-                } else {
-                    if (state.inAlert){
-                        //alert removed, send dry event to child device handler only once
-    					logger("StreamLabs SM pollSLAlert Alert0 deactivated ; call changeWaterToDry","info")
-                        existingDevice?.changeWaterToDry()
-                        state.inAlert =  false
+                //def SL_locationsAlert = resp_data.alerts[0]
+                def SL_locationsAlerts = resp_data.alerts
+                if (SL_locationsAlerts.size > 0) {
+                    logger("StreamLabs SM pollSLAlert # of alerts: ${SL_locationsAlerts.size}","trace")
+                    SL_locationsAlerts.each{
+                        //go through all active alerts to see if any are leaks
+                        if (it.active == "true") {
+                            if(it.type.contains('Leak')){
+                                //found a leak alert
+                                //send wet event to child device handler every poll to ensure not lost due to handler pausing
+                				logger("StreamLabs SM pollSLAlert Leak Alert received: ${it}; call changeWaterToWet","info")
+                                existingDevice?.changeWaterToWet()
+                                state.inAlert =  true
+                                SL_Leak_Found = true
+                            }
+                        }
                     }
                 }
+//                if (SL_locationsAlert) {
+                    //send wet event to child device handler every poll to ensure not lost due to handler pausing
+//    				logger("StreamLabs SM pollSLAlert Alert0 received: ${SL_locationsAlert}; call changeWaterToWet","info")
+//                    existingDevice?.changeWaterToWet()
+//                    state.inAlert =  true
+//                } else {
+                if (state.inAlert && !SL_Leak_Found){
+                    //alert removed, send dry event to child device handler only once
+					logger("StreamLabs SM pollSLAlert Leak Alert deactivated ; call changeWaterToDry","info")
+                    existingDevice?.changeWaterToDry()
+                    state.inAlert =  false
+                }
+//                }
             }
         } catch (e) {
     		logger("StreamLabs SM pollSLAlert error retrieving alerts: $e","error")
@@ -256,8 +275,8 @@ def initSL_Locations() {
                 //create device handler for this location (device)
                 def existingDevice = getChildDevice(state.SL_location.locationId)
                 if(!existingDevice) {
-                    def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow DH", 
-                          state.SL_location.locationId, null, [name: "Streamlabs Water Flow DH", 
+                    def childDevice = addChildDevice("windsurfer99", "StreamLabs Water Flow DH",
+                          state.SL_location.locationId, null, [name: "Streamlabs Water Flow DH",
                           label: "Streamlabs Water Flow DH", completedSetup: true])
 		    		logger("StreamLabs SM initSL_Locations- device created with Id: ${state.SL_location.locationId} for SL_location: ${state.SL_location.name}","info")
                 } else {
@@ -280,7 +299,7 @@ def updateAway(newHomeAway) {
             uri:  'https://api.streamlabswater.com/v1/locations/' + state.SL_location.locationId,
             headers: ['Authorization': 'Bearer ' + appSettings.api_key],
             contentType: 'application/json',
-			body : new groovy.json.JsonBuilder(cmdBody).toString()    
+			body : new groovy.json.JsonBuilder(cmdBody).toString()
             ]
 
 	logger("StreamLabs SM updateAway params: ${params}","info")
@@ -338,7 +357,7 @@ Map retrievecloudData() {
     determinehomeAway()
     determineFlows()
     pollSLAlert()
-	return ["todayFlow":state.todayFlow, "thisMonthFlow":state.thisMonthFlow, 
+	return ["todayFlow":state.todayFlow, "thisMonthFlow":state.thisMonthFlow,
       "thisYearFlow":state.thisYearFlow, "homeAway":state.homeAway, "inAlert":state.inAlert]
 }
 
@@ -393,7 +412,3 @@ private logger(msg, level = "debug") {
             break
     }
 }
-
-
-
-
