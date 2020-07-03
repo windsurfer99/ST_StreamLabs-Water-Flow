@@ -151,7 +151,10 @@ def pollSLAlert() {
                     logger("StreamLabs SM pollSLAlert # of alerts: ${SL_locationsAlerts.size}","trace")
                     SL_locationsAlerts.each{
                         //go through all active alerts to see if any are leaks
+                        logger("StreamLabs SM pollSLAlert it: ${it}","trace")
                         if (it.active == "true") {
+                            logger("StreamLabs SM pollSLAlert it.active is true: ${it.active}","trace")
+                            logger("StreamLabs SM pollSLAlert it.type: ${it.type}","trace")
                             if(it.type.contains('Leak')){
                                 //found a leak alert
                                 //send wet event to child device handler every poll to ensure not lost due to handler pausing
