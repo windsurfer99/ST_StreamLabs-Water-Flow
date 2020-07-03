@@ -152,7 +152,8 @@ def pollSLAlert() {
                     SL_locationsAlerts.each{
                         //go through all active alerts to see if any are leaks
                         logger("StreamLabs SM pollSLAlert it: ${it}","trace")
-                        if (it.active == 'true') {
+                        logger("StreamLabs SM pollSLAlert it.active: ${it.active}","trace")
+                        if (it.active.equalsIgnoreCase("true")) {
                             logger("StreamLabs SM pollSLAlert it.active is true: ${it.active}","trace")
                             logger("StreamLabs SM pollSLAlert it.type: ${it.type}","trace")
                             if(it.type.contains('Leak')){
