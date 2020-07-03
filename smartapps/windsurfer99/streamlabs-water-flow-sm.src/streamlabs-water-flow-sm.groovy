@@ -100,8 +100,7 @@ def initialize() {
     	def existingDevice = getChildDevice(state.SL_location?.locationId)
         existingDevice?.generateEvent(eventData)
         state.inAlert =  false
-//        schedule("0 0/3 * * * ?", pollSLAlert) //Poll Streamlabs cloud for leak alert
-        schedule("0 0/1 * * * ?", pollSLAlert) //Poll Streamlabs cloud for leak alert
+        schedule("0 0/3 * * * ?", pollSLAlert) //Poll Streamlabs cloud for leak alert
         runIn(8,"initDevice") //update once things are initialized
     }
 }
