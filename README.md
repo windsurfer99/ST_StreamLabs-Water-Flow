@@ -1,5 +1,5 @@
 # ST_StreamLabs-Water-Flow
-This is an unofficial **Classic** SmartThings interface to the [StreamLabs Smart Home Water Meter](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts in the form of SmartThings water leaks. This allows StreamLabs alerts to be interfaced to other SmartApps such as Smart Home Monitor. Note that the ability to delay (Pause) SmartThings declaring a water leak from a StreamLabs alert is an added feature of this implementation.
+This is an unofficial **Classic** SmartThings interface to the [StreamLabs Smart Home Water Meter](https://www.streamlabswater.com/). It allows SmartThings to be able to control the StreamLabs Home/Away status as well as providing StreamLabs flow alerts in the form of SmartThings water leaks. This allows StreamLabs alerts to be interfaced to other SmartApps such as Smart Home Monitor. Note that the ability to delay (Pause) SmartThings declaring a water leak from a StreamLabs alert is an added feature of this implementation. (This also works with the **New** SmartThings App also however the User Interface of the Device handler only displays wet/dry; it doesn't display water usage statistics or ability to display and control the home/away or pause function. A kludge has been added to allow pause feature to still work; see below).
 
 These modules are not intended to replace StreamLab's Phone App but to just provide an interface to SmartThings.
 ## Getting Started
@@ -13,7 +13,7 @@ You will need to request an API key for your account from StreamLabs. As of my i
 ### Install API Key
 After installing the Device Handler and Service Manager and then receiving the key from StreamLabs, the key must be entered into the Service Manager.  In the SmartThings IDE, select the newly installed "StreamLabs Water Flow SM" on the "My SmartApps" page. Select "App Settings" in upper right of the  page. Expand "Settings" on the App Settings page and enter "api_key" in the name box (if not already populated) and the provided key in the value box. select "Update' on the bottom of the page.
 ### Phone App Service Manager Installation
-You may want to be logged into the SmartThings IDE and viewing the "Live Logging" page for any errors that might occur during installation. Use the standard SmartApp installation methods to install the Service Manager in the Phone App. That is, go to the "Automation" page and the "SmartApps" tab. Scroll to the bottom and select "Add a SmartApp". At the bottom, select "My Apps". Select the "StreamLabs Water Flow SM". Configure the Service Manager. The following sections provide additional information on the options.
+You may want to be logged into the SmartThings IDE and viewing the "Live Logging" page for any errors that might occur during installation. Use the standard SmartApp installation methods to install the Service Manager in the Phone App. That is, via the "hamburger" 3 horizontal line menu, go to the "SmartApps" page. Press the plus sign to add a new SmartApp. Scroll to the bottom and select the "StreamLabs Water Flow SM". Configure the Service Manager. The following sections provide additional information on the options.
 
 Once the Service Manager is installed, it will search the StreamLabs cloud for the Water Meter. If it is found, the Device Handler will then be automatically installed within about 30 seconds.
 #### Assign Name for Service Manager
@@ -26,11 +26,15 @@ When the StreamLabs device is installed, you provided a name to be given to the 
 This is an optional value to control the level of logging in the IDE. Normally this can be left alone unless extensive debugging is desired.
 
 ### Device Handler Installation
-As stated previously, the Device Handler will be automatically installed; you should not manually install it. If you remove the Service Manager, the Device Handler will be automatically removed also. After the Device Handler has been installed, the following options are available (Press the gear in the Handler to modify these):
+As stated previously, the Device Handler will be automatically installed; you should not manually install it. If you remove the Service Manager, the Device Handler will be automatically removed also. After the Device Handler has been installed, the following options are available (Press the 3 dots in upper right and then select Settings in the Handler to modify these):
 #### Give your Device a Name
 Allows you to change the name of the Device Handler from its default.
 #### # of minutes for Pause
 This entry (along with the User Interface described below) allows for pausing a StreamLabs alert from registering a SmartThings water leak. The value entered here is how long the pause will stay in effect.
+#### Pause wet/dry monitoring?
+Added for **New** SmartThings App to replace the lost UI in the Device Handler. Select 'Pause' to duplicate lost functionality of the 'Pause button'. See description of Pause feature below. Note that the Device handler cannot programmatically reset the displayed value for this setting back to 'Monitor' after the pause time has elapsed, however monitoring will resume automatically. It is suggested that the user, sometime after the pause time should have elapsed, go back and change the setting back to 'Monitor' so as to not cause confusion.
+#### Temporarily Set Home/Away:
+Added for **New** SmartThings App to replace the lost UI in the Device Handler. Select 'Away' to duplicate lost functionality of the 'Home/away button'. See description of Home/away button below. Note that the Device handler cannot programmatically reset the displayed value for this setting back to 'Home' even if the mode changes. It is suggested that the user, sometime after a mode change puts the StreamLab App back to 'Home', go back and change the setting back to 'Home' so as to not cause confusion.
 #### IDE Live Logging Level
 This is an optional value to control the level of logging in the IDE. Normally this can be left alone unless extensive debugging is desired.
 
@@ -39,22 +43,22 @@ The following paragraphs describe the user interface elements.
 #### Wet/Dry
 This graphic at the top of the panel displays the current state of the Device: wet or dry. This Device Handler implements a standard water leak sensor device; as such this is read only and you cannot override the status.
 #### Home/Away
-This icon provides a graphical representation of the StreamLabs Home/Away status. The Home/Away status defines different algorithms within the Water Meter to determine if there is a leak. This icon is also a button; pressing it will toggle the StreamLabs status. Note that if one or more SmartThings modes have been set in the Service Manager configuration to control this status, toggling the status with this button will only be temporary until the next SmartThings mode change.
+(**Classic App only**) This icon provides a graphical representation of the StreamLabs Home/Away status. The Home/Away status defines different algorithms within the Water Meter to determine if there is a leak. This icon is also a button; pressing it will toggle the StreamLabs status. Note that if one or more SmartThings modes have been set in the Service Manager configuration to control this status, toggling the status with this button will only be temporary until the next SmartThings mode change.
 #### Pause
-This is a feature totally separate from the StreamLabs cloud. If you anticipate using a water flow that would exceed the trip settings in the StreamLabs App, you can press the "Pause" button. (For example you will be watering the lawn for the next hour.) This will cause the Device Handler to start a countdown to ignore any StreamLabs alerts for the number of minutes set in the Device Handler configuration ("# of minutes for Pause"). Once the time limit has expired, if the StreamLabs is still in an alert condition, then the Device Handler will post a 'Wet' condition. Note that this button is also a icon displaying whether the Device Handler is paused or not. To manually cancel the pause, just press the button again. If the configuration parameter is 0 or not set, the pause will stay on until you press the button again (i.e., there is no automatic timeout).
+(**Classic App only**) This is a feature totally separate from the StreamLabs cloud. If you anticipate using a water flow that would exceed the trip settings in the StreamLabs App, you can press the "Pause" button. (For example you will be watering the lawn for the next hour.) This will cause the Device Handler to start a countdown to ignore any StreamLabs alerts for the number of minutes set in the Device Handler configuration ("# of minutes for Pause"). Once the time limit has expired, if the StreamLabs is still in an alert condition, then the Device Handler will post a 'Wet' condition. Note that this button is also a icon displaying whether the Device Handler is paused or not. To manually cancel the pause, just press the button again. If the configuration parameter is 0 or not set, the pause will stay on until you press the button again (i.e., there is no automatic timeout).
 #### Refresh
-This button requests an update from the StreamLabs cloud of water usage and Home/Away state.
+(**Classic App only**) This button requests an update from the StreamLabs cloud of water usage and Home/Away state.
 #### Usage Today
-This displays the gallons used today (as reported by the StreamLabs cloud).
+(**Classic App only**) This displays the gallons used today (as reported by the StreamLabs cloud).
 #### Usage This Month
-This displays the gallons used this calendar month (as reported by the StreamLabs cloud).
+(**Classic App only**) This displays the gallons used this calendar month (as reported by the StreamLabs cloud).
 #### Usage This Year
-This displays the gallons used this calendar year (as reported by the StreamLabs cloud).
+(**Classic App only**) This displays the gallons used this calendar year (as reported by the StreamLabs cloud).
 ## Idiosyncrasies
 ### Polling
 I was not able to determine a method to subscribe for StreamLabs alerts using an API Key interface (I assume a mechanism doesn't exist). Therefore the Service Manager polls the StreamLabs cloud every 3 minutes for a change in alerts. I picked this as a compromise to not overload the cloud but to also receive timely events.
 ### Water Usage
-The water usage displayed in the Device Handler typically does not exactly match the usage displayed in the StreamLabs App. Based on a response in their forum, this is to be expected and is an artifact of their implementation.
+(**Classic App only**) The water usage displayed in the Device Handler typically does not exactly match the usage displayed in the StreamLabs App. Based on a response in their forum, this is to be expected and is an artifact of their implementation.
 ## License
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details
 ## Acknowledgments
