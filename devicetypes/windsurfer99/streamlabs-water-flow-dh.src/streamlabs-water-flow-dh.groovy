@@ -1,9 +1,11 @@
 /**
  *  StreamLabs Water Flow DH
  *  Device Handler for StreamLabs Water Flow Meter: Cloud Connected Device; created by StreamLabs Water Flow Service Manager/ SmartApp
- *  Version 1.0
+ *  Version 1.1
  *
- *  Copyright 2019 windsurfer99
+ *  This version adds a temporary fix for the new SmartThings App (which broke the UI) to allow the Pause feature to function via Settings page
+ *
+ *  Copyright 2019, 2020 windsurfer99
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -86,7 +88,29 @@ metadata {
             defaultValue: "3",
             required: false
         )
-	}
+        //The following two settings are temporary fix for transition to new Smartthings App which doesn't support the tile inputs. 
+        //Use settings instead
+		input (name: "settingsPause",
+            title: "Pause wet/dry monitoring?",
+            type: "enum",
+            options: [
+                "0" : "Pause",
+                "1" : "Monitor"
+            ],
+            defaultValue: "1",
+            required: false
+        )
+		input (name: "settingsHome",
+            title: "Temporarily Set Home/Away:",
+            type: "enum",
+            options: [
+                "0" : "Away",
+                "1" : "Home"
+            ],
+            defaultValue: "1",
+            required: false
+        )
+    }
 }
 //required implementations
 def installed() {
@@ -99,9 +123,11 @@ def initialize() {
     // Logging Level:
     state.loggingLevelIDE = (settings.zwtLoggingLevelIDE) ? settings.zwtLoggingLevelIDE.toInteger() : 3
 
-	log.debug "StreamLabs DH initialize() called with pause timeout: ${pauseDelay}"
+	//log.debug "StreamLabs DH initialize() called with pause timeout: ${pauseDelay}"
+	log.debug "StreamLabs DH initialize() called with pause timeout: ${pauseDelay}, Log level: ${zwtLoggingLevelIDE}, Pause/monitor: ${settingsPause}, Home/away: ${settingsHome}"
     schedule("0 0/10 * * * ?", poll) //refresh every 10 minutes
 	generateEvent([name:"suspend", value:"monitor"])
+	generateEvent([name:"homeAway", value:"home"])
     state.wetDry = "dry" //real status even if paused
 }
 
@@ -117,9 +143,18 @@ def updated(){
     // Logging Level:
     state.loggingLevelIDE = (settings.zwtLoggingLevelIDE) ? settings.zwtLoggingLevelIDE.toInteger() : 3
 
-    logger("StreamLabs DH updated() called","trace")
-    unschedule("poll")
-    runIn(7,"initialize")
+    logger("StreamLabs DH updated() called with pause timeout: ${pauseDelay}, Log level: ${zwtLoggingLevelIDE}, Pause/monitor: ${settingsPause}, Home/away: ${settingsHome}","trace")
+    if (settings.settingsPause != "0")
+    	{changeToMonitor()} 
+    else
+        {changeToPause()}
+
+	if (settings.settingsHome != "0")
+    	{changeToHome()} 
+    else
+        {changeToAway()}
+     //unschedule("poll")
+    //runIn(7,"initialize")
 }
 
 // parse events into attributes; not really used with this type of Device Handler
